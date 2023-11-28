@@ -4,13 +4,16 @@ import axios from "axios";
 import * as client from "./client";
 
 function Search() {
-    const [food, setFood] = useState("Asian");
-    const [location, setLocation] = useState("98105");
+    const [searchConditions, setSearchConditions] = useState({food: "", location: ""});
     const [results, setResults] = useState(null);
 
-    const fetchRestaurants = async () => {
-        const results = await client.findRestaurants(food, location);
-        setResults(results);
+    const search = async () => {
+        try {
+            const searchResults = await client.findRestaurants(searchConditions);
+            setResults(searchResults);
+        } catch (error) {
+            console.error("Error fetching results:", error);
+        }
     };
 
     return (
@@ -24,8 +27,7 @@ function Search() {
                     <input className="input" type="text" 
                         style={{ height: '100%' }} 
                         placeholder="Asian, American..."
-                        value={food}
-                        onChange={(e) => {setFood(e.target.value)}}/>
+                        onChange={(e) => setSearchConditions({...searchConditions, food: e.target.value})}/>
                 </p>
                 <p className="control">
                     <button className="btn btn-light" style={{ height: '100%' }}>NEAR</button>
@@ -34,11 +36,10 @@ function Search() {
                     <input className="input" type="text"
                         style={{ height: '100%' }}
                         placeholder="City or Zipcode"
-                        value={location}
-                        onChange={(e) => {setLocation(e.target.value)}}/>
+                        onChange={(e) => setSearchConditions({...searchConditions, location: e.target.value})}/>
                 </p>
                 <button className="btn btn-primary" style={{ height: '100%' }}
-                    onClick={fetchRestaurants}>
+                    onClick={search}>
                     <FaSearch style={{ height: '100%' }} />
                 </button>
             </div>
