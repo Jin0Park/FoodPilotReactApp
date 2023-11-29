@@ -31,7 +31,7 @@ function Navigation() {
                         <a className="nav-link" href="#">Sign Up</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Profile</a>
+                        <a className="nav-link" href="http://localhost:3000/#/FoodPilot/profile">Profile</a>
                     </li>
                 </ul>
             </div>

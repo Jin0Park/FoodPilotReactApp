@@ -1,0 +1,40 @@
+.photo_size {
+    height: 150px;
+    width: 150px;    
+}
+
+.profile-header {
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 2rem;
+}
+
+.profile-content {
+    text-align: left;
+    padding: 1rem;
+}
+
+.profile-personal-image {
+    margin-left: 1rem;
+    margin-right: 5rem;
+}
+
+.profile-personal-info {
+    color: black;
+    display: flex;
+    align-items: end;
+}
+
+.space {
+    text-indent: 10px;
+}
+
+.indented {
+    text-indent: 30px; 
+  }
+
+.bookmark-col {
+    display: block;
+
+}

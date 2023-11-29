@@ -1,0 +1,65 @@
+
+[{
+    "_id": "1",
+    "first-name": "John",
+    "last-name": "Doe",
+    "email": "johndoe@gmail.com",
+    "zip-code": "10203",
+    "phone": "1112223333"
+  },
+  {
+    "_id": "2",
+    "first-name": "Steve",
+    "last-name": "Henderson",
+    "email": "stevehenderson@gmail.com",
+    "zip-code": "12345",
+    "phone": "123123125"
+  },
+  {
+    "_id": "3",
+    "first-name": "Caitlyn",
+    "last-name": "Smith",
+    "email": "caitlynsmith@gmail.com",
+    "zip-code": "10203",
+    "phone": "435636453"
+  },
+  {
+    "_id": "4",
+    "first-name": "Moe",
+    "last-name": "Pizz",
+    "email": "moepizz@gmail.com",
+    "zip-code": "12333",
+    "phone": "6786786788"
+  },
+  {
+    "_id": "5",
+    "first-name": "Gina",
+    "last-name": "Jina",
+    "email": "ginajina@gmail.com",
+    "zip-code": "75663",
+    "phone": "7897897899"
+  },
+  {
+    "_id": "6",
+    "first-name": "Patrick",
+    "last-name": "Jackson",
+    "email": "patrickjackson@gmail.com",
+    "zip-code": "97102",
+    "phone": "8908908900"
+  },
+  {
+    "_id": "7",
+    "first-name": "Paul",
+    "last-name": "Pierce",
+    "email": "paulpierce@gmail.com",
+    "zip-code": "98004",
+    "phone": "1231231233"
+  },
+  {
+    "_id": "1",
+    "first-name": "Samantha",
+    "last-name": "Pilot",
+    "email": "sampilot@gmail.com",
+    "zip-code": "98104",
+    "phone": "2342342344"
+  }]
