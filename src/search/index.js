@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import axios from "axios";
 import * as client from "./client";
+import "./index.css";
 
 function Search() {
     const [searchConditions, setSearchConditions] = useState({food: "", location: ""});
@@ -17,34 +19,54 @@ function Search() {
     };
 
     return (
-        <div className="row search_bar">
-            <h1>Search Foods Near You</h1>
-            <div className="d-flex align-items-stretch m-0 p-0">
+        <div>
+            <h1 className="searchHeader">Let's find some food with FoodPilot!</h1>
+            <div className="d-flex align-items-stretch searchBar">
                 <p className="control">
-                    <button className="btn btn-light" style={{ height: '100%' }}>FOOD</button>
-                </p>
-                <p className="control">
-                    <input className="input" type="text" 
+                    <input className="input" type="text"
                         style={{ height: '100%' }} 
-                        placeholder="Asian, American..."
+                        placeholder="Food: Asian, American..."
                         onChange={(e) => setSearchConditions({...searchConditions, food: e.target.value})}/>
-                </p>
-                <p className="control">
-                    <button className="btn btn-light" style={{ height: '100%' }}>NEAR</button>
                 </p>
                 <p className="control">
                     <input className="input" type="text"
                         style={{ height: '100%' }}
-                        placeholder="City or Zipcode"
+                        placeholder="Location: Zipcode"
                         onChange={(e) => setSearchConditions({...searchConditions, location: e.target.value})}/>
                 </p>
-                <button className="btn btn-primary" style={{ height: '100%' }}
-                    onClick={search}>
-                    <FaSearch style={{ height: '100%' }} />
+                <button className="btn btn-primary col-auto searchButton" onClick={search}>
+                    <FaSearch className="searchIcon"/>
                 </button>
             </div>
-            <div>
-                <pre>JSON.stringify(results, null, 2)</pre>
+
+            <h2 className="resultHeader">Here are the results from FoodPilot!</h2>
+            <div className="searchResults">
+                <ul className="list-group results">
+                    {results &&
+                        results.map((restaurant, index) => (
+                            <li key={index} className="list-group-item">
+                                <div className="d-flex">
+                                    <div className="col-auto">
+                                        <img className="restaurantImage"
+                                            src={restaurant.image_url}>
+                                        </img>
+                                    </div>
+                                    <div className="col m-4">
+                                        <Link className="restaurantNameLink" to={restaurant.url}>
+                                            <h3 className="restaurantName">Name: {restaurant.name}</h3>
+                                        </Link>
+                                        <p>Business Status: {restaurant.is_closed === false ? 'Opened' : 'Closed'}</p>
+                                        <p>Rating: {restaurant.rating}</p>
+                                        <p>Price: {restaurant.price ? restaurant.price : 'N/A'}</p>
+                                        <p>Address: {restaurant.location.display_address}</p>
+                                        <p>Phone: {restaurant.display_phone}</p>
+                                    </div>
+                                </div>
+                            </li>
+                        ))
+                    }
+                </ul>
+                <pre>{JSON.stringify(results, null, 2)}</pre>
             </div>
         </div>
     );
