@@ -1,0 +1,23 @@
+.about-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    padding: 20px;
+    background: url("../Background.png");
+    background-size: cover;
+    opacity: 0.88;
+}
+
+.about-container h1 {
+    margin-bottom: 25px;
+    color: #a0dd12;
+    font-size: 4rem;
+}
+
+.about-container p {
+    color: #fff;
+    font-size: 2.5rem;
+}
