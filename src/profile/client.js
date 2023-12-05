@@ -3,7 +3,7 @@ import axios from "axios";
 //   withCredentials: true,
 // });
 
-export const BASE_API = process.env.REACT_APP_BASE_API_URL;
+export const BASE_API = "http://localhost:4000";
 console.log(BASE_API);
 export const USERS_API = `${BASE_API}/api/users`;
 export const signin = async (credentials) => {
@@ -36,6 +36,9 @@ export const createUser = async (user) => {
 export const findUserById = async (id) => {
   axios.defaults.withCredentials = true
   //const response = await axios.get(`${USERS_API}/${id}`);
+  console.log("now we are here");
+  console.log(`${USERS_API}`);
+  console.log(`${USERS_API}/6557fcefa11aca2377083760`);
   const response = await axios.get(`${USERS_API}/6557fcefa11aca2377083760`);
   console.log(response);
   return response.data;
