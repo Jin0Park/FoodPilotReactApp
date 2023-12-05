@@ -1,65 +1,105 @@
 
 [{
-    "_id": "1",
-    "first-name": "John",
-    "last-name": "Doe",
+    "_id": {
+      "$oid": "6557fcefa11aca2377083754"
+    },
+    "username": "johndoe",
+    "password": "jd123",
+    "firstName": "John",
+    "lastName": "Doe",
     "email": "johndoe@gmail.com",
-    "zip-code": "10203",
-    "phone": "1112223333"
+    "zipCode": "10203",
+    "phone": "1112223333",
+    "role": "USER"
   },
   {
-    "_id": "2",
-    "first-name": "Steve",
-    "last-name": "Henderson",
+    "_id": {
+      "$oid": "6557fcefa11aca2377083755"
+    },    
+    "username": "steveh",
+    "password": "sh123",
+    "firstName": "Steve",
+    "lastName": "Henderson",
     "email": "stevehenderson@gmail.com",
-    "zip-code": "12345",
-    "phone": "123123125"
+    "zipCode": "12345",
+    "phone": "123123125",
+    "role": "USER"
   },
   {
-    "_id": "3",
-    "first-name": "Caitlyn",
-    "last-name": "Smith",
+    "_id": {
+      "$oid": "6557fcefa11aca2377083756"
+    },
+    "username": "csmith",
+    "password": "cm123",
+    "firstName": "Caitlyn",
+    "lastName": "Smith",
     "email": "caitlynsmith@gmail.com",
-    "zip-code": "10203",
-    "phone": "435636453"
+    "zipCode": "10203",
+    "phone": "435636453",
+    "role": "USER"
   },
   {
-    "_id": "4",
-    "first-name": "Moe",
-    "last-name": "Pizz",
+    "_id": {
+      "$oid": "6557fcefa11aca2377083757"
+    },
+    "username": "moepizz",
+    "password": "mp123",
+    "firstName": "Moe",
+    "lastName": "Pizz",
     "email": "moepizz@gmail.com",
-    "zip-code": "12333",
-    "phone": "6786786788"
+    "zipCode": "12333",
+    "phone": "6786786788",
+    "role": "USER"
   },
   {
-    "_id": "5",
-    "first-name": "Gina",
-    "last-name": "Jina",
+    "_id": {
+      "$oid": "6557fcefa11aca2377083758"
+    },    
+    "username": "gijigiji",
+    "password": "gjgj",
+    "firstName": "Gina",
+    "lastName": "Jina",
     "email": "ginajina@gmail.com",
-    "zip-code": "75663",
-    "phone": "7897897899"
+    "zipCode": "75663",
+    "phone": "7897897899",
+    "role": "USER"
   },
   {
-    "_id": "6",
-    "first-name": "Patrick",
-    "last-name": "Jackson",
+    "_id": {
+      "$oid": "6557fcefa11aca2377083759"
+    },
+    "username": "pizzapj",
+    "password": "cheese",
+    "firstName": "Patrick",
+    "lastName": "Jackson",
     "email": "patrickjackson@gmail.com",
-    "zip-code": "97102",
-    "phone": "8908908900"
+    "zipCode": "97102",
+    "phone": "8908908900",
+    "role": "USER"
   },
   {
-    "_id": "7",
-    "first-name": "Paul",
-    "last-name": "Pierce",
+    "_id": {
+      "$oid": "6557fcefa11aca2377083760"
+    },    
+    "username": "boston",
+    "password": "greens",
+    "firstName": "Paul",
+    "lastName": "Pierce",
     "email": "paulpierce@gmail.com",
-    "zip-code": "98004",
-    "phone": "1231231233"
+    "zipCode": "98004",
+    "phone": "1231231233",
+    "role": "USER"
   },
   {
-    "_id": "1",
-    "first-name": "Samantha",
-    "last-name": "Pilot",
+    "_id": {
+      "$oid": "6557fcefa11aca2377083761"
+    },    
+    "username": "samiam",
+    "password": "airforce",
+    "firstName": "Samantha",
+    "lastName": "Pilot",
     "email": "sampilot@gmail.com",
-    "zip-code": "98104",
-    "phone": "2342342344"
+    "zipCode": "98104",
+    "phone": "2342342344",
+    "role": "USER"
   }]
