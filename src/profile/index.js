@@ -21,7 +21,8 @@ function Profile() {
 
     const findUserById = async (id) => {
     //   const user = await client.findUserById(id);
-      const user = await client.findUserById("6557fcefa11aca2377083760");
+      console.log("here we are");
+      const user = await client.findUserById('6557fcefa11aca2377083760');
     //   account = user;
     //   setAccount(user);
         setAccountFirstName(user.firstName);
@@ -34,8 +35,6 @@ function Profile() {
     //   const user = await client.account();
     //   setCurrentUser(user);
     // };
-
-
 
 
     const navigate = useNavigate();
