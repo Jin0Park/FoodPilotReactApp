@@ -6,6 +6,27 @@
     padding: 2rem 0;
 }
 
+.suppose {
+    background-color: rgba(82, 170, 55, 0.381) !important;
+
+}
+
+.float-center {
+    justify-content: center;
+}
+
+.bg-c {
+    color: black;
+}
+
+.ed-b {
+    margin-right: 6px;
+}
+
+.ed-mg-t {
+    margin-top: 50px;
+}
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -58,4 +79,34 @@
 .navbar-nav {
     margin-left: 1rem;
     /* Adds space to the left of the nav links */
+}
+
+.search-edits {
+    margin-right: 8px;
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+/* Specific styles for the first input */
+.search-edits:first-of-type {
+    border-radius: 4px 0 0 4px;
+}
+
+/* Specific styles for the second input */
+.search-edits:nth-of-type(2) {
+    border-left: none;
+    border-radius: 0;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #f1f1f1;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
 }

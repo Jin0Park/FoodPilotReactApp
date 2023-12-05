@@ -7,6 +7,7 @@ import Home from "./home";
 import Login from "./login";
 import Search from "./search";
 import Profile from "./profile";
+import Contact from "./contact";
 
 
 function App() {
@@ -16,12 +17,13 @@ function App() {
               <Navigation />
               <div className="style-bg">
                   <Routes>
-                      <Route path="/" element={<Navigate to="home"/>} />
+                      <Route path="/" element={<Navigate to="/FoodPilot/home"/>} />
                       <Route path="/FoodPilot/about" element={<About/>} />
                       <Route path="/FoodPilot/home" element={<Home/>} />
                       <Route path="/FoodPilot/login" element={<Login/>} />
                       <Route path="/FoodPilot/search" element={<Search/>} />
                       <Route path="/FoodPilot/profile" element={<Profile/>} />
+                      <Route path="/FoodPilot/contact" element={<Contact/>} />
                   </Routes>
               </div>
           </div>

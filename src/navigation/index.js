@@ -4,7 +4,7 @@ import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Navigation() {
-    const links = ["about", "home", "search", "login", "profile"];
+    const links = ["home", "search", "login", "profile", "about", "contact"];
     const { pathname } = useLocation();
 
     return (
@@ -15,9 +15,6 @@ function Navigation() {
             </button>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
-                    <li className="nav-item">
-                        <a className="nav-link" href="http://localhost:3000/#/FoodPilot/about">About</a>
-                    </li>
                     <li className="nav-item active">
                         <a className="nav-link cr-co" href="http://localhost:3000/#/FoodPilot/home">Home </a>
                     </li>
@@ -25,13 +22,16 @@ function Navigation() {
                         <a className="nav-link cr-co" href="http://localhost:3000/#/FoodPilot/search">Search </a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Log In</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Sign Up</a>
+                        <a className="nav-link" href="http://localhost:3000/#/FoodPilot/login">LogIn/SignUp</a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="http://localhost:3000/#/FoodPilot/profile">Profile</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="http://localhost:3000/#/FoodPilot/about">About</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="http://localhost:3000/#/FoodPilot/contact">Contact</a>
                     </li>
                 </ul>
             </div>

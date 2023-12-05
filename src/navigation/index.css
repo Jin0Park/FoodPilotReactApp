@@ -45,3 +45,18 @@
 .bg-edit {
     background-color: rgba(82, 170, 55, 0.381);
 }
+
+@media (max-width: 768px) {
+
+    /* Adjust the pixel value based on when you want the change to happen */
+    .navbar .nav-item {
+        display: none;
+        /* Hide all nav-items */
+    }
+
+    .navbar .nav-item.important {
+        /* Add an 'important' class to your important links */
+        display: block;
+        /* Show only important links */
+    }
+}
