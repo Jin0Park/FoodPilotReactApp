@@ -4,9 +4,9 @@ import { FaSearch } from "react-icons/fa";
 import axios from "axios";
 import * as client from "./client";
 import "./index.css";
+import { FaStar } from "react-icons/fa";
 
-function Search() {
-    const [searchConditions, setSearchConditions] = useState({food: "", location: ""});
+function Search({searchConditions, setSearchConditions}) {
     const [results, setResults] = useState(null);
 
     const search = async () => {
@@ -22,24 +22,28 @@ function Search() {
         <div>
             <h1 className="searchHeader">Let's find some food with FoodPilot!</h1>
             <div className="d-flex align-items-stretch searchBar">
-                <p className="control">
+                <p className="control ed-b">
                     <input className="input" type="text"
                         style={{ height: '100%' }} 
                         placeholder="Food: Asian, American..."
+                        // value={searchConditions.food}
                         onChange={(e) => setSearchConditions({...searchConditions, food: e.target.value})}/>
                 </p>
-                <p className="control">
+                <p className="control ed-b">
                     <input className="input" type="text"
                         style={{ height: '100%' }}
                         placeholder="Location: Zipcode"
+                        // value={searchConditions.location}
                         onChange={(e) => setSearchConditions({...searchConditions, location: e.target.value})}/>
                 </p>
-                <button className="btn btn-primary col-auto searchButton" onClick={search}>
+                <button className="btn suppose btn-success col-auto searchButton" onClick={search}>
                     <FaSearch className="searchIcon"/>
                 </button>
             </div>
 
-            <h2 className="resultHeader">Here are the results from FoodPilot!</h2>
+            {results && (
+                <h2 className="resultHeader">Here are the results from FoodPilot!</h2>
+            )}
             <div className="searchResults">
                 <ul className="list-group results">
                     {results &&
@@ -53,13 +57,25 @@ function Search() {
                                     </div>
                                     <div className="col m-4">
                                         <Link className="restaurantNameLink" to={restaurant.url}>
-                                            <h3 className="restaurantName">Name: {restaurant.name}</h3>
+                                            <h3 className="restaurantName">
+                                                Name: {restaurant.name}
+                                                <button className="btn position-absolute m-1 bookmarkButton">
+                                                    <FaStar className="starIcon"/>
+                                                </button>
+                                            </h3>
                                         </Link>
                                         <p>Business Status: {restaurant.is_closed === false ? 'Opened' : 'Closed'}</p>
                                         <p>Rating: {restaurant.rating}</p>
                                         <p>Price: {restaurant.price ? restaurant.price : 'N/A'}</p>
                                         <p>Address: {restaurant.location.display_address}</p>
                                         <p>Phone: {restaurant.display_phone}</p>
+                                    </div>
+                                    <div className="col likedUsersBox m-4">
+                                        <h4 className="m-2">Liked By:</h4>
+                                        <ul className="m-2 likedUsersList">
+                                            <li><Link>User 1</Link></li>
+                                            <li><Link>User 2</Link></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </li>
