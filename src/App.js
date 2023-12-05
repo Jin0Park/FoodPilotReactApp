@@ -10,6 +10,7 @@ import Profile from "./profile";
 import ProfileEdit from "./profile/edit";
 import UserList from "./profile/list";
 
+
 function App() {
   return (
       <HashRouter>
@@ -21,6 +22,7 @@ function App() {
                       <Route path="/FoodPilot/home" element={<Home/>} />
                       <Route path="/" element={<Navigate to="/FoodPilot/about"/>} />
                       <Route path="/FoodPilot/admin/users" element={<UserList />} />
+
                       <Route path="/FoodPilot/login" element={<Login/>} />
                       <Route path="/FoodPilot/search" element={<Search/>} />
                       <Route path="/FoodPilot/profile" element={<Profile/>} />
