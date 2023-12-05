@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-import * as client from "./client";
+import * as client from "../login/client";
 import { useNavigate, Link, useParams } from "react-router-dom";
 
 //import mongoose from "mongoose";
@@ -73,19 +73,12 @@ function Profile() {
     // }, []);
 
     useEffect(() => {
-        findUserById('6557fcefa11aca2377083760');
-        // return the below after you receive id from signin
-        // if (id) {
-        //   findUserById(id);
-        // } else {
-        //   fetchAccount();
-        // }
+        fetchAccount();
       }, []);
     
     return (
         <div>
-        {/* {account && ( */}
-        {accountFirstName && (
+        {account && (
             <header className="profile-header">
             <div className="profile-content">
                 <div className="row">
@@ -96,7 +89,7 @@ function Profile() {
                     </div>
                     <div className="profile-personal-info col-sm-10">
                         <span>
-                            <b>{<b>{accountFirstName} {accountLastName}</b>}</b><br/>{<b>{accountEmail}</b>}<br/>{<b>{accountZipCode}</b>}
+                            <b>{<b>{account.firstName} {account.lastName}</b>}</b><br/>{<b>{account.email}</b>}<br/>{<b>{account.zipCode}</b>}
                         </span>
                         {/* <b>{account.firstName}</b> */}
                     </div>
