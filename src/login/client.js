@@ -1,17 +1,28 @@
 import axios from "axios";
 
-const LOGIN_URL = `${process.env.REACT_APP_API_URL}/api/login`;
+const USERS_API = `${process.env.REACT_APP_API_URL}/api/users`;
 
-export const registerUser = async (userId, payload) => {
-  const response = await axios.post(
-    `${LOGIN_URL}/${userId}`,
-    payload
-  );
+const request = axios.create({
+  withCredentials: true,
+});
+
+export const signin = async (credentials) => {
+  const response = await request.post(`${USERS_API}/signin`, credentials);
   return response.data;
 };
 
-export const findUserById = async (userId) => {
-  const response = await axios.get(`${LOGIN_URL}/${userId}`);
+export const signup = async (credentials) => {
+  const response = await request.post(
+    `${USERS_API}/signup`, credentials);
   return response.data;
 };
 
+export const findUserById = async (id) => {
+  const response = await request.get(`${USERS_API}/${id}`);
+  return response.data;
+};
+
+export const account = async () => {
+  const response = await request.post(`${USERS_API}/account`);
+  return response.data;
+};

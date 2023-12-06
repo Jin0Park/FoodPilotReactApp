@@ -1,11 +1,23 @@
 import { Link, useParams, useLocation } from "react-router-dom";
 import "./index.css";
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import * as client from "../login/client";
 
 function Navigation() {
     const links = ["home", "search", "login", "profile", "about", "contact"];
     const { pathname } = useLocation();
+    const [account, setAccount] = useState(null);
+
+    const fetchAccount = async () => {
+        const account = await client.account();
+        console.log(account);
+        setAccount(account);
+    };
+
+    useEffect(() => {
+        fetchAccount();
+    }, []);
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-edit ">
@@ -33,6 +45,9 @@ function Navigation() {
                     <li className="nav-item">
                         <a className="nav-link" href="http://localhost:3000/#/FoodPilot/contact">Contact</a>
                     </li>
+                    {account && (<li className="nav-item">
+                    <a className="nav-link user" href="#">Hi {account.username}</a>
+                    </li>)}
                 </ul>
             </div>
         </nav>
