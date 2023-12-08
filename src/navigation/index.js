@@ -44,12 +44,14 @@
 import { Link, useLocation } from "react-router-dom";
 import "./index.css";
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from "react-redux";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as client from "../login/client";
 function Navigation() {
     const [isNavCollapsed, setIsNavCollapsed] = useState(true);
     const { pathname } = useLocation();
-    const [account, setAccount] = useState(null);
+    //const [account, setAccount] = useState(null);
+    const account = useSelector((state) => state.accountReducer.account);
 
     // const fetchAccount = async () => {
     //     const account = await client.account();
@@ -75,30 +77,31 @@ function Navigation() {
                 onClick={handleNavCollapse}>
                 <span className="navbar-toggler-icon"></span>
             </button>
-            <div className={`${isNavCollapsed ? 'collapse' : ''} navbar-collapse`} id="navbarSupportedContent">
+            <div className={`${isNavCollapsed ? 'collapse' : ''} navbar-collapse justify-content-end`} id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
-                    <li className={`nav-item ${pathname === "/FoodPilot/home" ? "active" : ""}`}>
-                        <Link className="nav-link cr-co" to="/FoodPilot/home">Home</Link>
+                    <li className="nav-item active">
+                    <Link className="nav-link cr-co" to="/FoodPilot/home">Home </Link>
                     </li>
-                    <li className={`nav-item ${pathname === "/FoodPilot/search" ? "active" : ""}`}>
-                        <Link className="nav-link cr-co" to="/FoodPilot/search">Search</Link>
+                    <li className="nav-item active">
+                        <Link className="nav-link cr-co" to="/FoodPilot/search">Search </Link>
                     </li>
-                    <li className={`nav-item ${pathname === "/FoodPilot/login" ? "active" : ""}`}>
-                        <Link className="nav-link cr-co" to="/FoodPilot/login">LogIn/SignUp</Link>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/FoodPilot/login">LogIn/SignUp</Link>
                     </li>
-                    <li className={`nav-item ${pathname === "/FoodPilot/profile" ? "active" : ""}`}>
-                        <Link className="nav-link cr-co" to="/FoodPilot/profile">Profile</Link>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/FoodPilot/profile">Profile</Link>
                     </li>
-                    <li className={`nav-item ${pathname === "/FoodPilot/about" ? "active" : ""}`}>
-                        <Link className="nav-link cr-co" to="/FoodPilot/about">About</Link>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/FoodPilot/about">About</Link>
                     </li>
-                    <li className={`nav-item ${pathname === "/FoodPilot/contact" ? "active" : ""}`}>
-                        <Link className="nav-link cr-co" to="/FoodPilot/contact">Contact</Link>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/FoodPilot/contact">Contact</Link>
                     </li>
-                    {account && (<li className="nav-item">
-                        <a className="nav-link user" href="#">Hi {account.username}</a>
-                    </li>)}
+                    
                 </ul>
+                {account && (
+                    <Link className="nav-link user" to="/FoodPilot/profile">Hi {account.username}</Link>
+                )}
             </div>
         </nav>
     );
