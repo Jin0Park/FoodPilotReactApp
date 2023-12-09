@@ -1,25 +1,31 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
-import axios from "axios";
 import * as client from "./client";
 import "./index.css";
 import { FaStar } from "react-icons/fa";
 
-function Search({searchConditions, setSearchConditions}) {
+function Search() {
+    const { food, location } = useParams();
+    const [searchConditions, setSearchConditions] = useState({food: food, location: location});
     const [results, setResults] = useState(null);
+    const navigate = useNavigate();
 
-    const search = async () => {
-        try {
-            const searchResults = await client.findRestaurants(searchConditions);
-            setResults(searchResults);
-        } catch (error) {
-            console.error("Error fetching results:", error);
-        }
+    const fetchResults = async (searchConditions) => {
+        const results = await client.findRestaurants(searchConditions);
+        setResults(results);
+        setSearchConditions(searchConditions);
     };
+
+    useEffect(() => {
+        if (food && location) {
+            fetchResults({food, location});
+        }
+    }, [food, location]);
 
     return (
         <div>
+            <h1>Food: {searchConditions.food} Location: {searchConditions.location}</h1>
             <h1 className="searchHeader">Let's find some food with FoodPilot!</h1>
             <div className="d-flex align-items-stretch searchBar">
                 <p className="control ed-b">
@@ -34,9 +40,10 @@ function Search({searchConditions, setSearchConditions}) {
                         style={{ height: '100%' }}
                         placeholder="Location: Zipcode"
                         // value={searchConditions.location}
-                        onChange={(e) => setSearchConditions({...searchConditions, location: e.target.value})}/>
+                        onChange={(e) => setSearchConditions({...searchConditions,location: e.target.value})}/>
                 </p>
-                <button className="btn suppose btn-success col-auto searchButton" onClick={search}>
+                <button className="btn suppose btn-success col-auto searchButton" 
+                        onClick={() => navigate(`/FoodPilot/search/${searchConditions.food}/${searchConditions.location}`)}>
                     <FaSearch className="searchIcon"/>
                 </button>
             </div>
@@ -56,7 +63,7 @@ function Search({searchConditions, setSearchConditions}) {
                                         </img>
                                     </div>
                                     <div className="col m-4">
-                                        <Link className="restaurantNameLink" to={restaurant.url}>
+                                        <Link className="restaurantNameLink" to={`/FoodPilot/details/${restaurant.id}`}>
                                             <h3 className="restaurantName">
                                                 Name: {restaurant.name}
                                                 <button className="btn position-absolute m-1 bookmarkButton">
@@ -70,13 +77,13 @@ function Search({searchConditions, setSearchConditions}) {
                                         <p>Address: {restaurant.location.display_address}</p>
                                         <p>Phone: {restaurant.display_phone}</p>
                                     </div>
-                                    <div className="col likedUsersBox m-4">
+                                    {/* <div className="col likedUsersBox m-4">
                                         <h4 className="m-2">Liked By:</h4>
                                         <ul className="m-2 likedUsersList">
                                             <li><Link>User 1</Link></li>
                                             <li><Link>User 2</Link></li>
                                         </ul>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </li>
                         ))

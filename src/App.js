@@ -11,7 +11,7 @@ import Profile from "./profile";
 import ProfileEdit from "./profile/edit";
 import UserList from "./profile/list";
 import Contact from './contact';
-
+import Details from "./details";
 
 function App() {
     return (
@@ -27,6 +27,8 @@ function App() {
 
                         <Route path="/FoodPilot/login" element={<Login />} />
                         <Route path="/FoodPilot/search" element={<Search />} />
+                        <Route path="/FoodPilot/search/:food/:location" element={<Search />} />
+                        <Route path="/FoodPilot/details/:restaurantId" element={<Details/>} />
                         <Route path="/FoodPilot/profile" element={<Profile />} />
                         <Route path="/FoodPilot/profile/edit" element={<ProfileEdit />} />
                         <Route path="/FoodPilot/about" element={<About />} />
