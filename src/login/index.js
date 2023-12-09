@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import "./index.css";
 import * as client from "./client";
+import { setAccount } from "./accountReducer";
 
 function Login() {
   const [error, setError] = useState("");
@@ -11,6 +13,7 @@ function Login() {
     username: "", password: ""
   });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const dayOptions = [];
   for (let i = 1; i <= 31; i++) {
@@ -40,9 +43,14 @@ function Login() {
     }
   };
 
+  const fetchAccount = async () => {
+    dispatch(setAccount(await client.account()));
+  };
+
   const signin = async () => {
     try {
       await client.signin(credentials);
+      await fetchAccount();
       navigate("/FoodPilot/home");
     } catch (err) {
       setError(`Login failed, please register.`);
@@ -126,11 +134,3 @@ function Login() {
   );
 }
 export default Login;
-
-export function constructLoginJson(username, password, roles) {
-  return JSON.stringify({
-    "username": username,
-    "password": password,
-    "roles": roles,
-  });
-}
