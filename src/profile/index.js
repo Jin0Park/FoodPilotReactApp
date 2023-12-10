@@ -7,6 +7,8 @@ import { useNavigate, Link, useParams } from "react-router-dom";
 import { setAccount } from '../login/accountReducer';
 import { useSelector, useDispatch } from "react-redux";
 import { Roles } from '../login/roles';
+import * as currBookmarks from "../bookmark/client";
+
 export const BASE_API = process.env.REACT_APP_BASE_API_URL;
 export const USERS_API = `${BASE_API}/api/users`;
 
@@ -14,11 +16,21 @@ function Profile() {
     var profilePic = require('../../src/images/profile.png');
     var account = useSelector((state) => state.accountReducer.account);
     const dispatch = useDispatch();
-
+    const [bookmarks, setBookmarks] = useState([]);
+    const { id } = useParams();
     const signout = async () => {
         const status = await client.signout();
         dispatch(setAccount({ username: "Anonymous", role: Roles.ANONYMOUS }));
       };
+
+      const fetchBookmarks = async () => {
+        const bookmarks = await currBookmarks.findRestaurantsThatUserBookmarks(id);
+        setBookmarks(bookmarks);
+      };
+
+      useEffect(() => {
+        fetchBookmarks();
+      }, [id]);
 
     return (
         <div>
@@ -32,9 +44,16 @@ function Profile() {
                         </section>
                     </div>
                     <div className="profile-personal-info col-sm-10">
-                        <span>
-                            <b>{<b>{account.firstName} {account.lastName} {account.role}</b>}</b><br/>{<b>{account.email}</b>}<br/>{<b>{account.zipCode}</b>}
-                        </span>
+                        { account.role == "ADMIN" && (
+                            <span>
+                                <b>{<b>{account.firstName} {account.lastName} {account.role}</b>}</b><br/>{<b>{account.email}</b>}<br/>{<b>{account.zipCode}</b>}
+                            </span>                            
+                        )}
+                        { account.role != "ADMIN" && (
+                            <span>
+                                <b>{<b>{account.firstName} {account.lastName}</b>}</b><br/>{<b>{account.email}</b>}<br/>{<b>{account.zipCode}</b>}
+                            </span>                
+                        )}
                     </div>
                 </div>
             </div>
