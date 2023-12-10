@@ -1,8 +1,19 @@
 import React from 'react';
 import './index.css';
+import { Roles } from '../login/roles';
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useParams, useLocation } from "react-router-dom";
 // import bg from 'src/Background.jpeg'
 
 function Contact() {
+  const account = useSelector((state) => state.accountReducer.account);
+  if (account.role === Roles.ANONYMOUS) {
+    return (
+      <div className="contact-container">
+        <h3>Please <a href="#/FoodPilot/login">login / register</a> first to access this page.</h3>
+      </div>
+    );
+  }
   return (
     <div className="contact-container">
       <h1>We'd Love to Hear From You!</h1>
