@@ -44,12 +44,12 @@ function Profile() {
                         </section>
                     </div>
                     <div className="profile-personal-info col-sm-10">
-                        { account.role == "ADMIN" && (
+                        { account.role === "ADMIN" && (
                             <span>
                                 <b>{<b>{account.firstName} {account.lastName} {account.role}</b>}</b><br/>{<b>{account.email}</b>}<br/>{<b>{account.zipCode}</b>}
                             </span>                            
                         )}
-                        { account.role != "ADMIN" && (
+                        { account.role !== "ADMIN" && (
                             <span>
                                 <b>{<b>{account.firstName} {account.lastName}</b>}</b><br/>{<b>{account.email}</b>}<br/>{<b>{account.zipCode}</b>}
                             </span>                
@@ -94,7 +94,7 @@ function Profile() {
 
             {/* ONLY SHOW WHEN USER IS CURRENT AND IS ADMIN */}
             <a>{account.role}</a>
-            {account.role == "ADMIN" && (
+            {account.role === "ADMIN" && (
                 <Link
                     key={"list"}
                     to={'/FoodPilot/admin/users'}

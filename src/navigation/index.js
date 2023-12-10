@@ -109,7 +109,7 @@ function Navigation() {
                                     </li>
                                 </ul>
                             )}
-                            {account.username == "Anonymous" && (
+                            {account.username === "Anonymous" && (
                                 <ul class="dropdown-menu">
                                     <li><Link className="dropdown-item" to="/FoodPilot/login">Log in</Link></li>
                                 </ul>  
