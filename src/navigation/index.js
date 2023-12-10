@@ -125,7 +125,7 @@ function Navigation() {
                     
                 </ul>
                 {account && (
-                    <Link className="nav-link user" to="/FoodPilot/profile">Hi {account.username}</Link>
+                    <Link className="nav-link user" to="/FoodPilot/profile">Hi, {account.username}</Link>
                 )}
             </div>
         </nav>

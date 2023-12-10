@@ -14,6 +14,14 @@ function Contact() {
       </div>
     );
   }
+  if (account.role === Roles.ADMIN) {
+    return (
+      <div className="contact-container">
+        <h3>Admin user cannot access this page</h3>
+        <h3>Please <a href="#/FoodPilot/login">login / register</a> to another account to access this page.</h3>
+      </div>
+    );
+  }
   return (
     <div className="contact-container">
       <h1>We'd Love to Hear From You!</h1>
