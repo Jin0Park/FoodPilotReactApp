@@ -4,13 +4,16 @@ import { useSelector, useDispatch } from "react-redux";
 import "./index.css";
 import * as client from "./client";
 import { setAccount } from "./accountReducer";
+import { Roles } from "./roles";
 
 function Login() {
   const [error, setError] = useState("");
   const [isRegister, setIsRegister] = useState(false);
   const [registerSucceed, setRegisterSucceed] = useState(false);
   const [credentials, setCredentials] = useState({
-    username: "", password: ""
+    username: "",
+    password: "",
+    role: Roles.USER,
   });
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -99,15 +102,45 @@ function Login() {
             </div>
             <div className="role-container">
               <div className="form-check">
-                <input className="form-check-input" type="radio" name="flexRadioDefault" id="AdminRole" />
+                <input className="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                checked={credentials.role === Roles.ADMIN}
+                onChange={() => setCredentials({
+                  ...credentials,
+                  role: Roles.ADMIN
+                })}
+                id="AdminRole" />
                 <label className="form-check-label" for="AdminRole">
                   Admin
                 </label>
               </div>
               <div className="form-check">
-                <input className="form-check-input" type="radio" name="flexRadioDefault" id="SearchRole" checked />
-                <label className="form-check-label" for="SearchRole">
-                  Search
+                <input className="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                checked={credentials.role === Roles.BUSINESS_OWNER}
+                onChange={() => setCredentials({
+                  ...credentials,
+                  role: Roles.BUSINESS_OWNER
+                })}
+                id="BusinessOwnerRole" />
+                <label className="form-check-label" for="BusinessOwnerRole">
+                  Business Owner
+                </label>
+              </div>
+              <div className="form-check">
+                <input className="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                checked={credentials.role === Roles.USER}
+                onChange={() => setCredentials({
+                  ...credentials,
+                  role: Roles.USER
+                })}
+                id="UserRole" />
+                <label className="form-check-label" for="UserRole">
+                  User
                 </label>
               </div>
             </div>
