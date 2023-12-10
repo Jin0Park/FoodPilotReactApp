@@ -2,80 +2,24 @@ import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-import * as client from "../login/client";
+import * as client from "../profile/client";
 import { useNavigate, Link, useParams } from "react-router-dom";
-
-//import mongoose from "mongoose";
+import { setAccount } from '../login/accountReducer';
+import { useSelector, useDispatch } from "react-redux";
+import { Roles } from '../login/roles';
 export const BASE_API = process.env.REACT_APP_BASE_API_URL;
 export const USERS_API = `${BASE_API}/api/users`;
 
 function Profile() {
     var profilePic = require('../../src/images/profile.png');
-    const { id } = useParams();
-    const [account, setAccount] = useState(null);
+    var account = useSelector((state) => state.accountReducer.account);
+    const dispatch = useDispatch();
 
-    const [accountFirstName, setAccountFirstName] = useState([]);
-    const [accountLastName, setAccountLastName] = useState([]);
-    const [accountEmail, setAccountEmail] = useState([]);
-    const [accountZipCode, setAccountZipCode] = useState([]);
+    const signout = async () => {
+        const status = await client.signout();
+        dispatch(setAccount({ username: "Anonymous", role: Roles.ANONYMOUS }));
+      };
 
-    const findUserById = async (id) => {
-    //   const user = await client.findUserById(id);
-      console.log("here we are");
-      const user = await client.findUserById('6557fcefa11aca2377083760');
-    //   account = user;
-    //   setAccount(user);
-        setAccountFirstName(user.firstName);
-        setAccountLastName(user.lastName);
-        setAccountEmail(user.email);
-        setAccountZipCode(user.zipCode);
-    };
-    // const [currentUser, setCurrentUser] = useState(null);
-    // const fetchUser = async () => {
-    //   const user = await client.account();
-    //   setCurrentUser(user);
-    // };
-
-
-    const navigate = useNavigate();
-    const fetchAccount = async () => {
-      const account = await client.account();
-      console.log(account);
-      setAccount(account);
-    };
-    // const save = async () => {
-    //   await client.updateUser(account);
-    //   console.log(account);
-    // };
-    // const signout = async () => {
-    //   console.log("logout");
-  
-    //   await client.signout();
-    //   navigate("/FoodPilot/about");
-    // };
-  
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //       try {
-    //         const data = await client.findUserById("6557fcefa11aca2377083754");
-    //         setAccountFirstName(data.firstName);
-    //         setAccountLastName(data.lastName);
-    //         setAccountEmail(data.email);
-    //         setAccountZipCode(data.zipCode);
-
-    //       } catch (error) {
-    //         console.error('Error fetching user data:', error);
-    //       }
-    //     };
-    
-    //     fetchData();
-    //     //fetchUser();
-    // }, []);
-
-    useEffect(() => {
-        fetchAccount();
-      }, []);
-    
     return (
         <div>
         {account && (
@@ -89,9 +33,8 @@ function Profile() {
                     </div>
                     <div className="profile-personal-info col-sm-10">
                         <span>
-                            <b>{<b>{account.firstName} {account.lastName}</b>}</b><br/>{<b>{account.email}</b>}<br/>{<b>{account.zipCode}</b>}
+                            <b>{<b>{account.firstName} {account.lastName} {account.role}</b>}</b><br/>{<b>{account.email}</b>}<br/>{<b>{account.zipCode}</b>}
                         </span>
-                        {/* <b>{account.firstName}</b> */}
                     </div>
                 </div>
             </div>
@@ -115,26 +58,33 @@ function Profile() {
                     </div>
                 </div>
             </div>
-
+            <Link
+              key={"list"}
+              to={'/FoodPilot/home'}
+              onClick={signout}
+              className="btn btn-danger button edit-button mt-5 me-2">
+                Log Out
+            </Link>
 {/* `            ONLY SHOW WHEN USER IS CURRENT USER` */}
             <Link
               key={"edit"}
-              to={'/FoodPilot/profile/edit'}
+              to={`/FoodPilot/profile/edit/${account._id}`}
               className="btn btn-success button edit-button mt-5 me-2">
                 Edit Profile
             </Link>
 
             {/* ONLY SHOW WHEN USER IS CURRENT AND IS ADMIN */}
-            <Link
-              key={"list"}
-              to={'/FoodPilot/admin/users'}
-              className="btn btn-warning button edit-button mt-5 me-2">
-                Profile List
-            </Link>
-            
+            <a>{account.role}</a>
+            {account.role == "ADMIN" && (
+                <Link
+                    key={"list"}
+                    to={'/FoodPilot/admin/users'}
+                    className="btn btn-warning button edit-button mt-5 me-2">
+                    Profile List
+                </Link>
+            )}
           </header>
-        )
-        }
+        )}
         </div>
     )
 };

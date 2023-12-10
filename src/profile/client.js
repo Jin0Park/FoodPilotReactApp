@@ -1,7 +1,7 @@
 import axios from "axios";
-// const request = axios.create({
-//   withCredentials: true,
-// });
+const request = axios.create({
+  withCredentials: true,
+});
 
 export const BASE_API = "http://localhost:4000";
 console.log(BASE_API);
@@ -18,9 +18,8 @@ export const account = async () => {
     console.log(response);
     return response.data;
 };
-export const updateUser = async (user) => {
-  axios.defaults.withCredentials = true
-  const response = await axios.put(`${USERS_API}/${user._id}`, user);
+export const updateUser = async (id, user) => {
+  const response = await request.put(`${USERS_API}/${id}`, user);
   return response.data;
 };
 export const findAllUsers = async () => {

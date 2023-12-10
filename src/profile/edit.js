@@ -10,38 +10,14 @@ import * as client from "./client";
 export const BASE_API = process.env.REACT_APP_BASE_API_URL;
 export const USERS_API = `${BASE_API}/api/users`;
 
-function edit() {
+function Edit() {
     var profilePic = require('../../src/images/profile.png');
-
-    // const [currentUser, setCurrentUser] = useState({});
-    // const fetchUser = async () => {
-    //   const user = await client.account();
-    //   setCurrentUser(user);
-    // };
-
-    // const [accountFirstName, setAccountFirstName] = useState([]);
-    // const [accountLastName, setAccountLastName] = useState([]);
-    // const [accountEmail, setAccountEmail] = useState([]);
-    // const [accountZipCode, setAccountZipCode] = useState([]);
-
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //       try {
-    //         const data = await client.findUserById("123");
-    //         setAccountFirstName(data.firstName);
-    //         setAccountLastName(data.lastName);
-    //         setAccountEmail(data.email);
-    //         setAccountZipCode(data.zipCode);
-
-    //       } catch (error) {
-    //         console.error('Error fetching user data:', error);
-    //       }
-    //     };
-    
-    //     fetchData();
-    //     //fetchUser();
-    // }, []);
-
+    var [account, setAccount] = useState(null);
+    account = useSelector((state) => state.accountReducer.account);
+    const updateUser = async () => {
+      console.log(account.firstName);
+      const status = await client.updateUser(account._id, account);
+    };
     return (
         <header className="profile-header">
         <div className="profile-edit-content">
@@ -55,32 +31,50 @@ function edit() {
             </div>
             <div className="row">
                 <div className="input-container">
-                    <input type="text" id="first-name" placeholder="First Name" />
-                    <input type="text" id="last-name" placeholder="Last Name" />
-                    <input type="text" id="email" placeholder="Email" />
-                    <input type="text" id="zip-code" placeholder="Zip Code" />
-                    <input type="text" id="phone" placeholder="Phone" />
-                </div>
+                <input className="form-control" type="text" id="first-name" value={account.firstName} onChange={(e) => setAccount({
+                ...account,
+                firstName: e.target.value
+              })} />
+              <input type="text" id="last-name" value={account.lastName} onChange={(e) => setAccount({
+                ...account,
+                lastName: e.target.value
+              })} />
+              <input type="text" id="email" value={account.email} onChange={(e) => setAccount({
+                ...account,
+                email: e.target.value
+              })} />
+              <input type="text" id="zip-code" value={account.zipCode} onChange={(e) => setAccount({
+                ...account,
+                zipCode: e.target.value
+              })} />
+              <input type="text" id="phone" value={account.phone} onChange={(e) => setAccount({
+                ...account,
+                phone: e.target.value
+              })} />
+              <input type="text" id="password" value={account.password} onChange={(e) => setAccount({
+                ...account,
+                password: e.target.value
+              })} />
+              </div>
             </div>
-
             </div>
         </div>
-
         <Link
           key={"cancel"}
-          to={'/FoodPilot/profile'}
+          to={`/FoodPilot/profile/${account._id}`}
           className="btn btn-danger button edit-button mt-5 me-2">
             Cancel
         </Link>        
         <Link
-          key={"update"}
-          to={'/FoodPilot/profile'}
+          key={"save"}
+          to={`/FoodPilot/profile/${account._id}`}
+          onClick={updateUser}
           className="btn btn-success button edit-button mt-5 me-2">
-            Update
+            Save
         </Link>    
         <Link
           key={"change_photo"}
-          to={'/FoodPilot/profile'}
+          to={`/FoodPilot/profile/${account._id}`}
           className="btn btn-primary button edit-button mt-5 me-2">
             Change Photo
         </Link>    
@@ -91,4 +85,4 @@ function edit() {
 }
 
 
-export default edit;
+export default Edit;

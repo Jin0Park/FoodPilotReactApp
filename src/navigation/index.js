@@ -46,22 +46,20 @@ import "./index.css";
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import * as client from "../login/client";
+import * as client from "../profile/client";
+import { Roles } from '../login/roles';
+import { setAccount } from '../login/accountReducer';
+
 function Navigation() {
     const [isNavCollapsed, setIsNavCollapsed] = useState(true);
     const { pathname } = useLocation();
-    //const [account, setAccount] = useState(null);
-    const account = useSelector((state) => state.accountReducer.account);
+    var account = useSelector((state) => state.accountReducer.account);
+    const dispatch = useDispatch();
 
-    // const fetchAccount = async () => {
-    //     const account = await client.account();
-    //     console.log(account);
-    //     setAccount(account);
-    // };
-
-    // useEffect(() => {
-    //     fetchAccount();
-    // }, []);
+    const signout = async () => {
+        const status = await client.signout();
+        dispatch(setAccount({ username: "Anonymous", role: Roles.ANONYMOUS }));
+      };
 
     const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
 
@@ -88,8 +86,35 @@ function Navigation() {
                     <li className="nav-item">
                         <Link className="nav-link" to="/FoodPilot/login">LogIn/SignUp</Link>
                     </li>
+                    {/* <profileDropdownItems 
+                        isLoggedIn={account.username == "Anonymous"}
+                    /> */}
                     <li className="nav-item">
-                        <Link className="nav-link" to="/FoodPilot/profile">Profile</Link>
+                        <div class="dropdown dropdown-margin">
+                            <a class="btn-profile dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Profile
+                            </a>
+                            {account.username != "Anonymous" && (
+                                <ul class="dropdown-menu">
+                                    <li><Link className="dropdown-item" to={`/FoodPilot/profile/${account._id}`}>Profile</Link></li>
+                                    <li><Link className="dropdown-item" to={`/FoodPilot/profile/edit/${account._id}`}>Edit Profile</Link></li>
+                                    <li><Link 
+                                            className="dropdown-item" 
+                                            to="/FoodPilot/home"
+                                            onClick={signout}
+                                            // onChange={singoutPlz}
+                                            >
+                                            Log Out
+                                        </Link>
+                                    </li>
+                                </ul>
+                            )}
+                            {account.username == "Anonymous" && (
+                                <ul class="dropdown-menu">
+                                    <li><Link className="dropdown-item" to="/FoodPilot/login">Log in</Link></li>
+                                </ul>  
+                            )}
+                        </div>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" to="/FoodPilot/about">About</Link>

@@ -65,3 +65,14 @@
         /* Show only important links */
     }
 }
+
+.dropdown-margin {
+    margin-top: 13px;
+    text-decoration: none;
+}
+
+.btn-profile {
+    text-decoration: none;
+    color: white;
+    padding-left: 2rem;
+}
