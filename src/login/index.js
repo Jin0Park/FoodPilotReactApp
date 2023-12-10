@@ -37,10 +37,24 @@ function Login() {
   }
 
   const signup = async () => {
+    if (
+      !credentials.username ||
+      !credentials.password ||
+      !credentials.firstName ||
+      !credentials.lastName ||
+      !credentials.email ||
+      !credentials.zipCode ||
+      !credentials.phone
+    ) {
+      setError("Please fill out all required fields.");
+      return; // Exit the function if required fields are not filled
+    }
+
     try {
       await client.signup(credentials);
       setIsRegister(false);
       setRegisterSucceed(true);
+      setError("");
     } catch (err) {
       setError(err.response.data.message);
     }
@@ -51,6 +65,14 @@ function Login() {
   };
 
   const signin = async () => {
+    if (
+      !credentials.username ||
+      !credentials.password
+    ) {
+      setError("Please fill out all required fields.");
+      return; // Exit the function if required fields are not filled
+    }
+
     try {
       await client.signin(credentials);
       await fetchAccount();
@@ -70,11 +92,13 @@ function Login() {
           <input type="text" placeholder="Username" onChange={(e) => setCredentials({
             ...credentials,
             username: e.target.value
-          })} />
+          })}
+          required />
           <input type="password" placeholder="Password" onChange={(e) => setCredentials({
             ...credentials,
             password: e.target.value
-          })} />
+          })}
+          required />
         </div>
         {isRegister && (
           <div>
@@ -82,23 +106,28 @@ function Login() {
               <input type="text" id="first-name" placeholder="First Name" onChange={(e) => setCredentials({
                 ...credentials,
                 firstName: e.target.value
-              })} />
+              })}
+              required />
               <input type="text" id="last-name" placeholder="Last Name" onChange={(e) => setCredentials({
                 ...credentials,
                 lastName: e.target.value
-              })} />
+              })}
+              required />
               <input type="text" id="email" placeholder="Email" onChange={(e) => setCredentials({
                 ...credentials,
                 email: e.target.value
-              })} />
+              })}
+              required />
               <input type="text" id="zip-code" placeholder="Zip Code" onChange={(e) => setCredentials({
                 ...credentials,
                 zipCode: e.target.value
-              })} />
+              })}
+              required />
               <input type="text" id="phone" placeholder="Phone" onChange={(e) => setCredentials({
                 ...credentials,
                 phone: e.target.value
-              })} />
+              })}
+              required />
             </div>
             <div className="role-container">
               <div className="form-check">
