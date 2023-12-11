@@ -8,7 +8,7 @@ import { FaStar } from "react-icons/fa";
 
 function Search() {
     const { food, location } = useParams();
-    const [searchConditions, setSearchConditions] = useState({food: food, location: location});
+    const [searchConditions, setSearchConditions] = useState({ food: food, location: location });
     const [results, setResults] = useState(null);
     const navigate = useNavigate();
     const account = useSelector((state) => state.accountReducer.account);
@@ -21,77 +21,72 @@ function Search() {
 
     useEffect(() => {
         if (food && location) {
-            fetchResults({food, location});
+            fetchResults({ food, location });
         }
     }, [food, location]);
 
     return (
-        <div>
-            <h1 className="searchHeader">Let's find some food with FoodPilot!</h1>
-            <div className="d-flex align-items-stretch searchBar">
-                <p className="control ed-b">
-                    <input className="input" type="text"
-                        style={{ height: '100%' }} 
-                        placeholder="Food: Asian, American..."
-                        // value={searchConditions.food}
-                        onChange={(e) => setSearchConditions({...searchConditions, food: e.target.value})}/>
-                </p>
-                <p className="control ed-b">
-                    <input className="input" type="text"
-                        style={{ height: '100%' }}
-                        placeholder="Location: Zipcode"
-                        // value={searchConditions.location}
-                        onChange={(e) => setSearchConditions({...searchConditions,location: e.target.value})}/>
-                </p>
-                <button className="btn suppose btn-success col-auto searchButton" 
-                        onClick={() => navigate(`/FoodPilot/search/${searchConditions.food}/${searchConditions.location}`)}>
-                    <FaSearch className="searchIcon"/>
+        <div className="search-container">
+            <h1 className="search-header">Let's find some food with FoodPilot!</h1>
+            <div className="search-bar">
+                <input
+                    className="input-food"
+                    type="text"
+                    placeholder="Food: Asian, American..."
+                    value={searchConditions.food}
+                    onChange={(e) =>
+                        setSearchConditions({ ...searchConditions, food: e.target.value })
+                    }
+                />
+                <input
+                    className="input-location"
+                    type="text"
+                    placeholder="Location: Zipcode"
+                    value={searchConditions.location}
+                    onChange={(e) =>
+                        setSearchConditions({ ...searchConditions, location: e.target.value })
+                    }
+                />
+                <button
+                    className="search-button"
+                    onClick={() =>
+                        navigate(`/FoodPilot/search/${searchConditions.food}/${searchConditions.location}`)
+                    }
+                >
+                    <FaSearch className="search-icon" />
                 </button>
             </div>
 
-            {results && (
-                <h2 className="resultHeader">Here are the results from FoodPilot!</h2>
-            )}
-            <div className="searchResults">
-                <ul className="list-group results">
+            {results && <h2 className="result-header">Here are the results from FoodPilot!</h2>}
+            <div className="search-results">
+                <ul className="results-list">
                     {results &&
                         results.map((restaurant, index) => (
-                            <li key={index} className="list-group-item">
-                                <div className="d-flex">
-                                    <div className="col-auto">
-                                        <img className="restaurantImage"
-                                            src={restaurant.image_url}>
-                                        </img>
-                                    </div>
-                                    <div className="col m-4">
-                                        {/* Here, restaurant.id the yelpId of that restaurant. */}
-                                        <Link className="restaurantNameLink" to={`/FoodPilot/details/${restaurant.id}`}>
-                                            <h3 className="restaurantName">
+                            <Link className="restaurant-name-link" to={`/FoodPilot/details/${restaurant.id}`}>
+                                <li key={index} className="result-item">
+                                    <div className="restaurant-details">
+                                        <div className="restaurant-image">
+                                            <img className="restaurant-image"
+                                                src={restaurant.image_url}
+                                                alt={`${restaurant.name} image`}
+                                            />
+                                        </div>
+                                        <div className="restaurant-info">
+                                            <h3 className="restaurant-name">
                                                 Name: {restaurant.name}
-                                                <button className="btn position-absolute m-1 bookmarkButton">
-                                                    <FaStar className="starIcon"/>
-                                                </button>
                                             </h3>
-                                        </Link>
-                                        <p>Business Status: {restaurant.is_closed === false ? 'Opened' : 'Closed'}</p>
-                                        <p>Rating: {restaurant.rating}</p>
-                                        <p>Price: {restaurant.price ? restaurant.price : 'N/A'}</p>
-                                        <p>Address: {restaurant.location.display_address}</p>
-                                        <p>Phone: {restaurant.display_phone}</p>
+                                            <p>Business Status: {restaurant.is_closed === false ? 'Opened' : 'Closed'}</p>
+                                            <p>Rating: {restaurant.rating}</p>
+                                            <p>Price: {restaurant.price ? restaurant.price : 'N/A'}</p>
+                                            <p>Address: {restaurant.location.display_address}</p>
+                                            <p>Phone: {restaurant.display_phone}</p>
+                                        </div>
                                     </div>
-                                    {/* <div className="col likedUsersBox m-4">
-                                        <h4 className="m-2">Liked By:</h4>
-                                        <ul className="m-2 likedUsersList">
-                                            <li><Link>User 1</Link></li>
-                                            <li><Link>User 2</Link></li>
-                                        </ul>
-                                    </div> */}
-                                </div>
-                            </li>
+                                </li>
+                            </Link>
                         ))
                     }
                 </ul>
-                {/* <pre>{JSON.stringify(results, null, 2)}</pre> */}
             </div>
         </div>
     );
