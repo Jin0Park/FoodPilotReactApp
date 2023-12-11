@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const CONTACT_API = `${process.env.REACT_APP_API_URL}/api/contact`;
+export const BASE_API = "https://foodpilot-server.onrender.com";
+const CONTACT_API = `${BASE_API}/api/contact`;
 
 const request = axios.create({
     withCredentials: true,
