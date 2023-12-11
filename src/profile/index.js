@@ -7,7 +7,9 @@ import { useNavigate, Link, useParams } from "react-router-dom";
 import { setAccount } from '../login/accountReducer';
 import { useSelector, useDispatch } from "react-redux";
 import { Roles } from '../login/roles';
-import * as currBookmarks from "../bookmark/client";
+// import { setBookmarks } from '../bookmark/bookmarkReducer';
+import * as bookmarkClient from "../bookmark/client";
+
 
 export const BASE_API = process.env.REACT_APP_BASE_API_URL;
 export const USERS_API = `${BASE_API}/api/users`;
@@ -23,14 +25,16 @@ function Profile() {
         dispatch(setAccount({ username: "Anonymous", role: Roles.ANONYMOUS }));
       };
 
-      const fetchBookmarks = async () => {
-        const bookmarks = await currBookmarks.findRestaurantsThatUserBookmarks(id);
+    const fetchBookmarks = async () => {
+        const bookmarks = await bookmarkClient.findRestaurantsThatUserBookmarks(id);
+        console.log(bookmarks);
         setBookmarks(bookmarks);
-      };
+    };
 
-      useEffect(() => {
+
+    useEffect(() => {
         fetchBookmarks();
-      }, [id]);
+    }, [id]);
 
     return (
         <div>
@@ -64,16 +68,14 @@ function Profile() {
     
                     </div>
                     <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action">
-                            McDonald's</a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            Burger King</a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            Taco Bell</a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            Chipotle</a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            Mod Pizza</a>
+                        {bookmarks.map((bookmark, index) => (
+                            <li key={index} className="list-group-item">
+                                <Link to={`/FoodPilot/details/${bookmark.restaurantId}`}>
+                                    
+                                {bookmark.restaurantId}
+                                </Link>
+                            </li>
+                         ))}
                     </div>
                 </div>
             </div>
@@ -94,7 +96,7 @@ function Profile() {
 
             {/* ONLY SHOW WHEN USER IS CURRENT AND IS ADMIN */}
             <a>{account.role}</a>
-            {account.role === "ADMIN" && (
+            {account.role == Roles.ADMIN && (
                 <Link
                     key={"list"}
                     to={'/FoodPilot/admin/users'}

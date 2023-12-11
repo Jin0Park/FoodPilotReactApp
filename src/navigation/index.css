@@ -69,10 +69,22 @@
 .dropdown-margin {
     margin-top: 13px;
     text-decoration: none;
+    text-align: center;
 }
 
 .btn-profile {
     text-decoration: none;
     color: white;
     padding-left: 2rem;
+}
+
+.dropdown-items {
+    align-items: center;
+    width: 20px;
+}
+.dropdown-menu {
+    align-items: center;
+    text-align: center;
+    align-self: center;
+    /* max-width: 40px; */
 }
