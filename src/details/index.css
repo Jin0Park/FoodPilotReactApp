@@ -76,9 +76,10 @@
     margin: 0;
 }
 
-.user-bookmark {
+.user-bookmark { 
+    text-decoration: none;
+    color: dimgray !important;
     margin-bottom: 8px;
-    text-decoration: underline;
     cursor: pointer;
 }
 
