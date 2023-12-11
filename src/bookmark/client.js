@@ -1,6 +1,7 @@
 import axios from "axios";
 
-export const BASE_API = "https://foodpilot-server.onrender.com";
+// export const BASE_API = "https://foodpilot-server.onrender.com";
+export const BASE_API = "http://localhost:4000";
 const USERS_API = `${BASE_API}/api/users`;
 // const BOOKMARKS_API = `${process.env.REACT_APP_API_URL}/api/users/bookmarks`;
 const request = axios.create({
@@ -8,8 +9,8 @@ const request = axios.create({
   });
 
 export const findAllBookmarks = async () => {};
-export const createUserBookmarksRestaurant = async (userId, restaurantId) => {
-    const response = await request.post(`${USERS_API}/${userId}/bookmarks/${restaurantId}`);
+export const createUserBookmarksRestaurant = async (userId, restaurantId, restaurantName) => {
+    const response = await request.post(`${USERS_API}/${userId}/bookmarks/${restaurantId}/${restaurantName}`);
     return response.data;
 };
 export const deleteUserBookmarksRestaurant = async (userId, restaurantId) => {
