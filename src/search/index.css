@@ -1,73 +1,132 @@
-.searchHeader {
-    color: #696969;
+/* index.css */
+
+/* Overall container */
+.search-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Search header */
+.search-header {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 48px;
+    color: dimgray !important;
+}
+
+/* Search bar */
+.search-bar {
     display: flex;
-    justify-content: center;
-    margin: 30px 0 30px 0px;
-}
-
-.searchBar {
-    margin-left: 450px;
-    margin-right: 500px;
-    justify-content: center;
-}
-
-.searchButton {
-    max-width: max-content;
-    height: 40px;
     align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
-.searchIcon {
+.input-food,
+.input-location {
+    flex: 1;
+    margin-right: 10px;
+    padding: 10px;
+    border: 1px solid rgba(82, 170, 55, 0.381);
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.search-button {
+    background-color: rgba(82, 170, 55, 0.381);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.search-button:hover {
+    background-color: rgba(82, 170, 55, 0.381);
+}
+
+/* Results section */
+.result-header {
+    text-align: center;
+    font-size: 40px;
+    margin: 20px 0px 20px 0px;
+    color: dimgray !important;
+}
+
+/* Restaurant details */
+.restaurant-details {
     display: flex;
-    justify-content: center;
     align-items: center;
-}
-
-.resultHeader {
-    color: #696969;
-    display: flex;
     justify-content: center;
-    margin: 30px 0px 30px 0px;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-.searchResults {
-    margin: 50px 50px 50px 50px;
+.restaurant-image {
+    flex: 0 0 auto; /* Prevent image from stretching */
+    margin-right: 20px; /* Add space between image and info */
 }
 
-.restaurantImage {
-    width: 250px;
-    height: 250px;
+.restaurant-image img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
 }
 
-.results {
-    margin: 0px 150px 0px 150px;
+.restaurant-info {
+    /* margin-left: 10px; */
+    flex: 1;
+    text-align: left;
+    color: dimgray;
 }
 
-.restaurantNameLink {
+.restaurant-info:hover {
+    /* margin-left: 10px; */
+    color: white;
+}
+
+.restaurant-name-link {
     text-decoration: none;
+    color: dimgray;
+    font-size: 18px;
 }
 
-.restaurantName {
-    color: black;
-    font-family: "Open Sans", "Helvetica Neue",
-        Helvetica, Arial, sans-serif;
+/* .restaurant-name-link:hover {
+    color: white;
+} */
+
+.results-list {
+    list-style: none;
+    padding: 0;
 }
 
-.restaurantName:hover {
-    color: lightblue;
+.result-item {
+    border: 0px solid rgba(82, 170, 55, 0.381);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color:rgba(82, 170, 55, 0.381);
 }
 
-.likedUsersBox {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 200px;
-    height: 100%;
-    /* Additional styles for positioning */
-    top: 100%;
-    right: 0;
-    background-color: #fff;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    /* Fixed height and scrolling */
-    overflow: auto;
-    /* Enable scrolling */
+/* Responsive adjustments */
+@media screen and (min-width: 768px) {
+    .search-bar {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .restaurant-details {
+        flex-direction: row;
+        justify-content: flex-start;
+        text-align: left;
+    }
+    
+    .restaurant-image img {
+        width: 150px;
+        height: 150px;
+    }
 }

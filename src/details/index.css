@@ -1,20 +1,131 @@
-.restaurantImage {
-    width: 400px;
-    height: 400px;
+/* index.css */
+
+/* Overall container */
+.details-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
 }
 
-p, li {
-    margin-bottom: 5px;
+/* Restaurant details wrapper */
+.restaurant-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-ul {
-    padding-left: 20px;
+/* Restaurant image */
+.restaurant-image img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
 }
 
-li > p {
-    margin-bottom: 3px;
+/* Restaurant info */
+.restaurant-information {
+    text-align: center;
+    color: dimgray !important;
 }
 
-.bookmarkButton {
-    color: #696969;
+.restaurant-yelp-link {
+    text-decoration: none;
+    color: dimgray;
+}
+
+.restaurant-yelp-link:hover {
+    color: rgba(224,7,7,1);
+}
+
+.button-container {
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.bookmark-container {
+    color: dimgray !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center; /* Align text in the center */
+    height: 200px; /* Set a height to the container for vertical centering */
+    /* Additional styles for the container if needed */
+}
+
+/* Bookmark button */
+.bookmark-button {
+    padding: 8px 16px;
+    background-color: rgba(82, 170, 55, 0.381) !important;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.bookmark-button:hover {
+    color: rgba(224,7,7,1);
+}
+
+/* Users who bookmarked */
+.user-bookmarks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.user-bookmark { 
+    text-decoration: none;
+    color: dimgray !important;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+/* Additional details section */
+.additional-details {
+    margin-top: 20px;
+}
+
+.additional-details p {
+    margin-bottom: 8px;
+}
+
+/* Transactions list */
+.transactions ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* Business hours */
+.business-hours ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* Media query for responsiveness */
+@media screen and (min-width: 768px) {
+    /* Adjust styles for tablets */
+    .restaurant-details {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: flex-start;
+    }
+
+    .restaurant-image img {
+        max-width: 400px;
+    }
+
+    .restaurant-information {
+        text-align: left;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    /* Adjust styles for larger screens */
+    .details-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
 }
