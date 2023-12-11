@@ -10,12 +10,23 @@ import Japanese from '../images/Japanese.jpeg';
 import Mexican from '../images/Mexican.jpeg';
 import American from '../images/American.jpeg';
 import Chinese from '../images/Chinese.png';
+import DingFeng from '../images/DingFeng.jpg';
+import HoangLan from '../images/HoangLan.jpg';
+import SandPointGrill from '../images/SandPointGrill.jpg';
+import StateSide from '../images/StateSide.jpg';
+import Shiros from '../images/Shiros.jpg';
+import SpicyPoPo from '../images/SpicyPoPo.jpg';
 import Mediterranean from '../images/Mediterranean.jpeg';
 import { Link } from "react-router-dom";
 
 
 function Home() {
+  // restaurantNames:[DingFeng, Sand Point Grill, Hoang Lan, StateSide, Shiro's, Spicy PoPo]
+  const restaurantYelpIds = ["fsUHrquI9L7pEhzZYMmLiQ", "ehRi1S7QHUvl5LCJhEoepg", "hoang-HK0V0vH_pCGCi5bqhfNp1w", "_obwG8MG2OuFUe1TW3BjGw", "YSQiqH7RIWORk_Qp-A4SOg", "NKZF9zAJhI0iaG0t1aVx0w"];
   let navigate = useNavigate();
+
+  // <Link className="btn" to={`/FoodPilot/details/${restaurantYelpIds[0]}`}>Go to Restaurant</Link>
+
   const routeChange = () => {
     let path = `/FoodPilot/search`;
     navigate(path);
@@ -88,51 +99,51 @@ function Home() {
 
         <div class="card-container">
           <div class="card">
-            <img src={Background} className="card-img-top" alt="Card image cap" />
+            <img src={SandPointGrill} className="card-img-top" alt="Card image cap" />
             <div class="card-body">
-              <h5 class="card-title">Restaurant Name</h5>
-              <p class="card-text">Restaurant Description</p>
-              <a href="#" class="btn btn-primary">Go to Restaurant</a>
+              <h5 class="card-title">Sand Point Grill</h5>
+              <p class="card-text">American style grill and wine tasting</p>
+              <Link className="btn btn-primary" to={`/FoodPilot/details/${restaurantYelpIds[1]}`}>For more details</Link>
             </div>
           </div>
           <div class="card">
-            <img src={Background} className="card-img-top" alt="Card image cap" />
+            <img src={StateSide} className="card-img-top" alt="Card image cap" />
             <div class="card-body">
-              <h5 class="card-title">Restaurant Name</h5>
-              <p class="card-text">Restaurant Description</p>
-              <a href="#" class="btn btn-primary">Go to Restaurant</a>
+              <h5 class="card-title">StateSide</h5>
+              <p class="card-text">One-of-the-kind Asian fusion</p>
+              <Link className="btn btn-primary" to={`/FoodPilot/details/${restaurantYelpIds[3]}`}>For more details</Link>
             </div>
           </div>
           <div class="card">
-            <img src={Background} className="card-img-top" alt="Card image cap" />
+            <img src={Shiros} className="card-img-top" alt="Card image cap" />
             <div class="card-body">
-              <h5 class="card-title">Restaurant Name</h5>
-              <p class="card-text">Restaurant Description</p>
-              <a href="#" class="btn btn-primary">Go to Restaurant</a>
+              <h5 class="card-title">Shiro's</h5>
+              <p class="card-text">The premium suishi and Japanese cuisines</p>
+              <Link className="btn btn-primary" to={`/FoodPilot/details/${restaurantYelpIds[4]}`}>For more details</Link>
             </div>
           </div>
           <div class="card">
-            <img src={Background} className="card-img-top" alt="Card image cap" />
+            <img src={DingFeng} className="card-img-top" alt="Card image cap" />
             <div class="card-body">
-              <h5 class="card-title">Restaurant Name</h5>
-              <p class="card-text">Restaurant Description</p>
-              <a href="#" class="btn btn-primary">Go to Restaurant</a>
+              <h5 class="card-title">DingFeng Restaurant</h5>
+              <p class="card-text">The authentic Chinese seafood and dim sum</p>
+              <Link className="btn btn-primary" to={`/FoodPilot/details/${restaurantYelpIds[0]}`}>For more details</Link>
             </div>
           </div>
           <div class="card">
-            <img src={Background} className="card-img-top" alt="Card image cap" />
+            <img src={HoangLan} className="card-img-top" alt="Card image cap" />
             <div class="card-body">
-              <h5 class="card-title">Restaurant Name</h5>
-              <p class="card-text">Restaurant Description</p>
-              <a href="#" class="btn btn-primary">Go to Restaurant</a>
+              <h5 class="card-title">Hoang Lan Restaurant</h5>
+              <p class="card-text">The authentic Vietnamese noodles</p>
+              <Link className="btn btn-primary" to={`/FoodPilot/details/${restaurantYelpIds[2]}`}>For more details</Link>
             </div>
           </div>
           <div class="card">
-            <img src={Background} className="card-img-top" alt="Card image cap" />
+            <img src={SpicyPoPo} className="card-img-top" alt="Card image cap" />
             <div class="card-body">
-              <h5 class="card-title">Restaurant Name</h5>
-              <p class="card-text">Restaurant Description</p>
-              <a href="#" class="btn btn-primary">Go to Restaurant</a>
+              <h5 class="card-title">Spicy PoPo</h5>
+              <p class="card-text">The authentic Szechuan style cuisines </p>
+              <Link className="btn btn-primary" to={`/FoodPilot/details/${restaurantYelpIds[5]}`}>For more details</Link>
             </div>
           </div>
         </div>
@@ -148,6 +159,3 @@ function Home() {
 
 
 export default Home;
-
-
-
