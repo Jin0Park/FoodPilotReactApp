@@ -28,7 +28,6 @@ function Details() {
 
     return (
         <div>
-            { restaurantId }
             { restaurant && (
                 <div className="d-flex">
                     <div>
@@ -41,13 +40,13 @@ function Details() {
                                 Bookmark
                             </button>
                         )}
-                        <p>Category: {restaurant.categories[0].title}</p>
-                        <p>Business Status: {restaurant.is_closed === false ? 'Opened' : 'Closed'}</p>
-                        <p>Rating: {restaurant.rating} (Review Counts: {restaurant.review_count})</p>
+                        {restaurant.categories && <p>Category: {restaurant.categories[0].title}</p>}
+                        {restaurant.is_closed && <p>Business Status: {restaurant.is_closed === false ? 'Opened' : 'Closed'}</p>}
+                        {restaurant.rating && <p>Rating: {restaurant.rating} (Review Counts: {restaurant.review_count})</p>}
                         {restaurant.hours && <p>Currently Open: {restaurant.hours[0].is_open_now === true ? 'Opened' : 'Closed'}</p>}
-                        <p>Price: {restaurant.price}</p>
-                        <p>Phone: {restaurant.display_phone}</p>
-                        <p>Address: {restaurant.location.display_address}</p>
+                        {restaurant.price && <p>Price: {restaurant.price}</p>}
+                        {restaurant.display_phone && <p>Phone: {restaurant.display_phone}</p>}
+                        {restaurant.display_address && <p>Address: {restaurant.location.display_address}</p>}
                         <div>
                             Transactions: 
                             <ul>
