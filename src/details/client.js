@@ -1,4 +1,6 @@
 import axios from "axios";
+
+// export const BASE_API = "https://foodpilot-server.onrender.com";
 export const BASE_API = "http://localhost:4000";
 export const RESTAURANT_API = `${BASE_API}/api/restaurant`;
 

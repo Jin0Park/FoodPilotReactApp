@@ -14,7 +14,7 @@ function Details() {
     const account = useSelector((state) => state.accountReducer.account);
     
     const accountBookmarksRestaurant = async () => {
-        const bookmarks = await bookmarksClient.createUserBookmarksRestaurant(account._id, restaurantId);
+        const bookmarks = await bookmarksClient.createUserBookmarksRestaurant(account._id, restaurantId, restaurant.name);
     };
 
     const fetchRestaurant = async () => {

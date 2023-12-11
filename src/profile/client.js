@@ -3,6 +3,7 @@ const request = axios.create({
   withCredentials: true,
 });
 
+// export const BASE_API = "https://foodpilot-server.onrender.com";
 export const BASE_API = "http://localhost:4000";
 console.log(BASE_API);
 export const USERS_API = `${BASE_API}/api/users`;

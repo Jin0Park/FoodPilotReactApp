@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const USERS_API = `${process.env.REACT_APP_API_URL}/api/users`;
+// export const BASE_API = "https://foodpilot-server.onrender.com";
+export const BASE_API = "http://localhost:4000";
+const USERS_API = `${BASE_API}/api/users`;
 
 const request = axios.create({
   withCredentials: true,
