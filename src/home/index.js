@@ -22,7 +22,7 @@ import { Link } from "react-router-dom";
 
 function Home() {
   // restaurantNames:[DingFeng, Sand Point Grill, Hoang Lan, StateSide, Shiro's, Spicy PoPo]
-  const restaurantYelpIds = ["fsUHrquI9L7pEhzZYMmLiQ", "ehRi1S7QHUvl5LCJhEoepg", "hoang-HK0V0vH_pCGCi5bqhfNp1w", "_obwG8MG2OuFUe1TW3BjGw", "YSQiqH7RIWORk_Qp-A4SOg", "NKZF9zAJhI0iaG0t1aVx0w"];
+  const restaurantYelpIds = ["fsUHrquI8L7pEhzZYMmLiQ", "ehRi1S7QHUvl5LCJhEoepg", "HK0V0vH_pCGCi5bqhfNp1w", "_obwG8MG2OuFUe1TW3BjGw", "YSQiqH7RIWORk_Qp-A4SOg", "NKZF9zAJhI0iaG0t1aVx0w"];
   let navigate = useNavigate();
 
   // <Link className="btn" to={`/FoodPilot/details/${restaurantYelpIds[0]}`}>Go to Restaurant</Link>
