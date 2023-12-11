@@ -107,7 +107,7 @@ function UserList() {
                 <BsPencil onClick={() => selectUser(user)} />
                 </button>
                 {/* <Link to={`/FoodPilot/profile/${user._id}`} */}
-                <Link to={`/FoodPilot/profile`}
+                <Link to={`/FoodPilot/profile/${user._id}`}
                   className="btn btn-primary button">
                   Profile
                 </Link>

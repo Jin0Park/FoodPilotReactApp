@@ -89,31 +89,27 @@ function Navigation() {
                     {/* <profileDropdownItems 
                         isLoggedIn={account.username == "Anonymous"}
                     /> */}
-                    <li className="nav-item">
+                    <li className="nav-item active">
                         <div class="dropdown dropdown-margin">
                             <a class="btn-profile dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Profile
                             </a>
-                            {account.username != "Anonymous" && (
                                 <ul class="dropdown-menu">
-                                    <li><Link className="dropdown-item" to={`/FoodPilot/profile/${account._id}`}>Profile</Link></li>
-                                    <li><Link className="dropdown-item" to={`/FoodPilot/profile/edit/${account._id}`}>Edit Profile</Link></li>
-                                    <li><Link 
-                                            className="dropdown-item" 
-                                            to="/FoodPilot/home"
-                                            onClick={signout}
-                                            // onChange={singoutPlz}
-                                            >
-                                            Log Out
-                                        </Link>
-                                    </li>
+                                    {account.username != "Anonymous" && (
+                                        <div>
+                                            <li><Link className="dropdown-item" to={`/FoodPilot/profile/${account._id}`}>Profile</Link></li><li><Link className="dropdown-item" to={`/FoodPilot/profile/edit/${account._id}`}>Edit Profile</Link></li><li><Link
+                                                className="dropdown-item dropdown-items"
+                                                to="/FoodPilot/home"
+                                                onClick={signout}>
+                                                Log Out
+                                                </Link>
+                                            </li>
+                                        </div>
+                                    )}
+                                    {account.username == "Anonymous" && (
+                                        <li><Link className="dropdown-item" to="/FoodPilot/login">Log in</Link></li>
+                                    )}
                                 </ul>
-                            )}
-                            {account.username === "Anonymous" && (
-                                <ul class="dropdown-menu">
-                                    <li><Link className="dropdown-item" to="/FoodPilot/login">Log in</Link></li>
-                                </ul>  
-                            )}
                         </div>
                     </li>
                     <li className="nav-item">
