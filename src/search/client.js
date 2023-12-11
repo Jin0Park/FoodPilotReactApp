@@ -29,6 +29,11 @@ export const findRestaurantById = async (restaurantId) => {
     return response.data;
 };
 
+export const findRestaurantByYelpId = async (restaurantYelpId) => {
+    const response = await axios.get(`${RESTAURANTS_API}/yelpId/${restaurantYelpId}`);
+    return response.data;
+};
+
 export const updateRestaurant = async (restaurant) => {
     const response = await axios.put(`${RESTAURANTS_API}/${restaurant._id}`, restaurant);
     return response.data;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import * as client from "./client";
 import "./index.css";
 import { FaStar } from "react-icons/fa";
@@ -10,6 +11,7 @@ function Search() {
     const [searchConditions, setSearchConditions] = useState({food: food, location: location});
     const [results, setResults] = useState(null);
     const navigate = useNavigate();
+    const account = useSelector((state) => state.accountReducer.account);
 
     const fetchResults = async (searchConditions) => {
         const results = await client.findRestaurants(searchConditions);
@@ -25,7 +27,6 @@ function Search() {
 
     return (
         <div>
-            <h1>Food: {searchConditions.food} Location: {searchConditions.location}</h1>
             <h1 className="searchHeader">Let's find some food with FoodPilot!</h1>
             <div className="d-flex align-items-stretch searchBar">
                 <p className="control ed-b">
@@ -63,6 +64,7 @@ function Search() {
                                         </img>
                                     </div>
                                     <div className="col m-4">
+                                        {/* Here, restaurant.id the yelpId of that restaurant. */}
                                         <Link className="restaurantNameLink" to={`/FoodPilot/details/${restaurant.id}`}>
                                             <h3 className="restaurantName">
                                                 Name: {restaurant.name}

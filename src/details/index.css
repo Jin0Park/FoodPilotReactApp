@@ -14,3 +14,7 @@ ul {
 li > p {
     margin-bottom: 3px;
 }
+
+.bookmarkButton {
+    color: #696969;
+}
