@@ -91,7 +91,7 @@ function Search() {
                         ))
                     }
                 </ul>
-                <pre>{JSON.stringify(results, null, 2)}</pre>
+                {/* <pre>{JSON.stringify(results, null, 2)}</pre> */}
             </div>
         </div>
     );
