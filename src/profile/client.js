@@ -19,8 +19,8 @@ export const account = async () => {
     console.log(response);
     return response.data;
 };
-export const updateUser = async (id, user) => {
-  const response = await request.put(`${USERS_API}/${id}`, user);
+export const updateUser = async (id, credentials) => {
+  const response = await request.put(`${USERS_API}/${id}`, credentials);
   return response.data;
 };
 export const findAllUsers = async () => {
@@ -35,12 +35,9 @@ export const createUser = async (user) => {
 };
 export const findUserById = async (id) => {
   axios.defaults.withCredentials = true
-  //const response = await axios.get(`${USERS_API}/${id}`);
-  console.log("now we are here");
-  console.log(`${USERS_API}`);
-  console.log(`${USERS_API}/6557fcefa11aca2377083760`);
-  const response = await axios.get(`${USERS_API}/6557fcefa11aca2377083760`);
-  console.log(response);
+  // console.log(id);
+  const response = await axios.get(`${USERS_API}/${id}`);
+  //console.log(response);
   return response.data;
 };
 export const deleteUser = async (user) => {

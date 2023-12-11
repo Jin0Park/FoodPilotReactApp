@@ -90,3 +90,8 @@
 .black {
     text-emphasis-color: black;
 }
+
+.bookmark-items {
+    text-decoration: none;
+    color: black;
+}

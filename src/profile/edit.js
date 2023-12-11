@@ -12,8 +12,15 @@ export const USERS_API = `${BASE_API}/api/users`;
 
 function Edit() {
     var profilePic = require('../../src/images/profile.png');
-    var [account, setAccount] = useState(null);
+    var [account, setAccount] = useState();
+    const [credentials, setCredentials] = useState({
+      username: "",
+      password: "",
+      role: "",
+    });
+
     account = useSelector((state) => state.accountReducer.account);
+    
     const updateUser = async () => {
       console.log(account.firstName);
       const status = await client.updateUser(account._id, account);
@@ -31,30 +38,30 @@ function Edit() {
             </div>
             <div className="row">
                 <div className="input-container">
-                <input className="form-control" type="text" id="first-name" value={account.firstName} onChange={(e) => setAccount({
-                ...account,
-                firstName: e.target.value
-              })} />
-              <input type="text" id="last-name" value={account.lastName} onChange={(e) => setAccount({
-                ...account,
-                lastName: e.target.value
-              })} />
-              <input type="text" id="email" value={account.email} onChange={(e) => setAccount({
-                ...account,
-                email: e.target.value
-              })} />
-              <input type="text" id="zip-code" value={account.zipCode} onChange={(e) => setAccount({
-                ...account,
-                zipCode: e.target.value
-              })} />
-              <input type="text" id="phone" value={account.phone} onChange={(e) => setAccount({
-                ...account,
-                phone: e.target.value
-              })} />
-              <input type="text" id="password" value={account.password} onChange={(e) => setAccount({
-                ...account,
-                password: e.target.value
-              })} />
+                <input type="text" id="first-name" placeholder={account.firstName} defaultValue={null} onChange={(e) => setCredentials({
+                  ...credentials,
+                  firstName: e.target.value
+                })} />
+                <input type="text" id="last-name" placeholder={account.lastName} defaultValue={null} onChange={(e) => setCredentials({
+                  ...credentials,
+                  lastName: e.target.value
+                })} />
+                <input type="text" id="email" placeholder={account.email} defaultValue={null} onChange={(e) => setCredentials({
+                  ...credentials,
+                  email: e.target.value
+                })} />
+                <input type="text" id="zip-code" placeholder={account.zipCode} defaultValue={null} onChange={(e) => setCredentials({
+                  ...credentials,
+                  zipCode: e.target.value
+                })} />
+                <input type="text" id="phone" placeholder={account.phone} defaultValue={null} onChange={(e) => setCredentials({
+                  ...credentials,
+                  phone: e.target.value
+                })} />
+                <input type="text" id="password" placeholder={account.password} defaultValue={null} onChange={(e) => setCredentials({
+                  ...credentials,
+                  password: e.target.value
+                })} />
               </div>
             </div>
             </div>

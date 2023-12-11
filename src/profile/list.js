@@ -27,10 +27,7 @@ function UserList() {
   };
   const selectUser = async (user) => {
     try {
-      console.log("hello");
-      console.log(user._id);
       const u = await client.findUserById(user._id);
-      console.log(u);
       setUser(u);
     } catch (err) {
       console.log(err);
