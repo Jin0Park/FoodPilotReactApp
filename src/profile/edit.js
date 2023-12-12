@@ -7,23 +7,30 @@ import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import * as client from "./client";
+import { MdSouth } from "react-icons/md";
 export const BASE_API = process.env.REACT_APP_BASE_API_URL;
 export const USERS_API = `${BASE_API}/api/users`;
 
 function Edit() {
     var profilePic = require('../../src/images/profile.png');
     var [account, setAccount] = useState();
-    const [credentials, setCredentials] = useState({
-      username: "",
-      password: "",
-      role: "",
-    });
+
+    const { id } = useParams();
 
     account = useSelector((state) => state.accountReducer.account);
-    
+    const [credentials, setCredentials] = useState({
+      username: account.username,
+      password: "",
+      role: account.role,
+    });
     const updateUser = async () => {
-      console.log(account.firstName);
-      const status = await client.updateUser(account._id, account);
+      //console.log(id);
+      try {
+        console.log(credentials);
+        const status = await client.updateUser(account._id, credentials);
+      } catch (err) {
+        console.log(err);
+      }
     };
     return (
         <header className="profile-header">
@@ -78,7 +85,7 @@ function Edit() {
           onClick={updateUser}
           className="btn btn-success button edit-button mt-5 me-2">
             Save
-        </Link>    
+        </Link>
         <Link
           key={"change_photo"}
           to={`/FoodPilot/profile/${account._id}`}

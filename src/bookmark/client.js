@@ -15,6 +15,7 @@ export const createUserBookmarksRestaurant = async (userId, restaurantId, restau
     return response.data;
 };
 export const deleteUserBookmarksRestaurant = async (userId, restaurantId) => {
+    console.log("in bookmark client", userId, restaurantId);
     const response = await request.delete(`${USERS_API}/${userId}/bookmarks/${restaurantId}`);
     return response.data;
 };

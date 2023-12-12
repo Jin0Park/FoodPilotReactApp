@@ -7,9 +7,8 @@ import { useNavigate, Link, useParams } from "react-router-dom";
 import { setAccount } from '../login/accountReducer';
 import { useSelector, useDispatch } from "react-redux";
 import { Roles } from '../login/roles';
-// import { setBookmarks } from '../bookmark/bookmarkReducer';
 import * as bookmarkClient from "../bookmark/client";
-
+import * as followsClient from "../follows/client";
 export const BASE_API = process.env.REACT_APP_BASE_API_URL;
 export const USERS_API = `${BASE_API}/api/users`;
 
@@ -23,7 +22,8 @@ function Profile() {
     const [userEmail, setUserEmail] = useState(null);
     const [userZipCode, setUserZipCode] = useState(null);
     const [userRole, setUserRole] = useState(null);
-
+    const [followers, setFollowers] = useState([]);
+    const [following, setFollowing] = useState([]);
     const { id } = useParams();
     const signout = async () => {
         const status = await client.signout();
@@ -44,9 +44,40 @@ function Profile() {
         setUserRole(u.role);
     };
 
+    const deleteBookmark = async (restaurantId) => {
+        console.log(restaurantId);
+        const status = await bookmarkClient.deleteUserBookmarksRestaurant(id, restaurantId)
+    }
+
+    const followUser = async () => {
+        const status = await followsClient.userFollowsUser(id);
+    };
+    const unfollowUser = async () => {
+        const status = await followsClient.userUnfollowsUser(id);
+    };
+    const fetchFollowers = async () => {
+        const followers = await followsClient.findFollowersOfUser(id);
+        console.log("followers are", followers);
+        setFollowers(followers);
+    };
+    const fetchFollowing = async () => {
+        const following = await followsClient.findFollowedUsersByUser(id);
+        console.log("following are", following);
+        setFollowing(following);
+    };
+
+    const alreadyFollowing = () => {
+        return followers.some((follows) => {
+            return follows.follower._id === account._id;
+        });
+    };
+    console.log(followers);
+
     useEffect(() => {
         fetchBookmarks();
         fetchUserData();
+        fetchFollowers();
+        fetchFollowing();
     }, [id]);
     return (
         <div>
@@ -59,7 +90,7 @@ function Profile() {
                             <img style={{ width: 150, height: 150 }} src={profilePic} />
                         </section>
                     </div>
-                    <div className="profile-personal-info col-sm-10">
+                    <div className="profile-personal-info col-sm-5">
                         { account.role === "ADMIN" && (
                             <span>
                                 <b>{<b>{userFirstName} {userLastName} {userRole}</b>}</b><br/>{<b>{userEmail}</b>}<br/>{<b>{userZipCode}</b>}
@@ -71,23 +102,77 @@ function Profile() {
                             </span>                
                         )}
                     </div>
+                    <div className='col-sm follow-button'>
+                    {account._id != id && (
+                        <>
+                            {alreadyFollowing() ? (
+                                <Link
+                                className="btn btn-success button bookmark-delete-button"
+                                onClick={unfollowUser}
+                                >
+                                Unfollow
+                                </Link>
+                            ) : (
+                                <Link
+                                className="btn btn-success button bookmark-delete-button"
+                                onClick={followUser}
+                                >
+                                Follow
+                                </Link>    
+                            )}
+                        </>
+
+                    )}
+                    </div>
                 </div>
             </div>
-            <div className="profile-bookmark-info mt-5">
-                <div className="col">
-                    <div className="row-1 mt-5">
-                        <h3>Bookmarked Restaurants</h3>
-                    </div>
-                    <div className="list-group">
+            {/* <div className="profile-bookmark-info mt-5 container"> */}
+                <div className="row">
+                    <div className="col-sm-5">
+                        <div className="profile-bookmark-info row-1 mt-5">
+                            <h3>Bookmarked Restaurants</h3>
+                        </div>
+                        <div className="list-group">
                         {bookmarks.map((bookmark, index) => (
                             <li key={index} className="list-group-item">
                                 <Link className="bookmark-items" to={`/FoodPilot/details/${bookmark.restaurantId}`}>
                                 {bookmark.restaurantName}
+                                {account._id == id &&
+                                    <Link
+                                    className="btn btn-danger button bookmark-delete-button"
+                                    onClick={() => deleteBookmark(bookmark.restaurantId)}>
+                                    Delete
+                                </Link>                            
+                                }
                                 </Link>
                             </li>
-                         ))}
+                        ))}
+                        </div>
+                    </div>
+                    <div className="col-sm-1">
+                    </div>
+                    <div className="col-sm">
+                    <div className="profile-bookmark-info row-1 mt-5">
+                        <h3>Following</h3>
+                    </div>
+                    <div className="list-group">
+                    {following.map((follows, index) => (
+                        <li key={index} className="list-group-item">
+                            <Link className="bookmark-items" to={`/FoodPilot/profile/${follows.followed._id}`}>
+                            {follows.followed.username}
+                            {account._id == id &&
+                                <Link
+                                className="btn btn-danger button bookmark-delete-button"
+                                onClick={() => unfollowUser(follows.followed)}>
+                                Delete
+                            </Link>                            
+                            }
+                            </Link>
+                        </li>
+                    ))}
                     </div>
                 </div>
+                {/* </div> */}
             </div>
             <Link
               key={"list"}

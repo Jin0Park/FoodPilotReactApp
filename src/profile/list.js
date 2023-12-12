@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 import * as client from "./client";
 import { BsPencil, BsFillCheckCircleFill, BsTrash3Fill, BsPlusCircleFill } from "react-icons/bs"
 import { MdOutlineInsertLink } from "react-icons/md";
 
 function UserList() {
+  var account = useSelector((state) => state.accountReducer.account);
+
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState({ username: "", password: "", role: "USER" });
+  const [credentials, setCredentials] = useState({
+    username: user.username,
+    password: "",
+    role: user.role,
+  });
   const deleteUser = async (user) => {
+    console.log(user);
     try {
       await client.deleteUser(user);
       setUsers(users.filter((u) => u._id !== user._id));
@@ -26,6 +35,7 @@ function UserList() {
     }
   };
   const selectUser = async (user) => {
+    console.log(user);
     try {
       const u = await client.findUserById(user._id);
       setUser(u);
@@ -35,8 +45,9 @@ function UserList() {
   };
   const updateUser = async () => {
     try {
-      const status = await client.updateUser(user);
-      setUsers(users.map((u) => (u._id === user._id ? user : u)));
+      const status = await client.updateUser(user._id, credentials);
+      //const status = await client.updateUser(user);
+      //setUsers(users.map((u) => (u._id === user._id ? user : u)));
     } catch (err) {
       console.log(err);
     }
@@ -65,17 +76,17 @@ function UserList() {
         </tr>
         <tr>
             <td>
-              <input value={user.password} onChange={(e) => setUser({ ...user, password: e.target.value })}/>
-              <input value={user.username} onChange={(e) => setUser({ ...user, username: e.target.value })}/>
+              <input value={user.password} onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}/>
+              <input value={user.username} onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}/>
             </td>
             <td>
-              <input value={user.firstName} onChange={(e) => setUser({ ...user, firstName: e.target.value })}/>
+              <input value={user.firstName} onChange={(e) => setCredentials({ ...credentials, firstName: e.target.value })}/>
             </td>
             <td>
-              <input value={user.lastName} onChange={(e) => setUser({ ...user, lastName: e.target.value })}/>
+              <input value={user.lastName} onChange={(e) => setCredentials({ ...credentials, lastName: e.target.value })}/>
             </td>
             <td>
-              <select value={user.role} onChange={(e) => setUser({ ...user, role: e.target.value })}>
+              <select value={user.role} onChange={(e) => setCredentials({ ...credentials, role: e.target.value })}>
                 <option value="USER">User</option>
                 <option value="ADMIN">Admin</option>
                 <option value="BUSINESS_OWNER">Business Owner</option>
