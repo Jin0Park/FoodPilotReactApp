@@ -62,7 +62,7 @@ function Profile() {
     };
     const fetchFollowing = async () => {
         const following = await followsClient.findFollowedUsersByUser(id);
-        console.log("following are", following);
+        //console.log("following are", following);
         setFollowing(following);
     };
 
@@ -128,7 +128,7 @@ function Profile() {
             </div>
             {/* <div className="profile-bookmark-info mt-5 container"> */}
                 <div className="row">
-                    <div className="col-sm-5">
+                    <div className="col-sm-4">
                         <div className="profile-bookmark-info row-1 mt-5">
                             <h3>Bookmarked Restaurants</h3>
                         </div>
@@ -149,9 +149,8 @@ function Profile() {
                         ))}
                         </div>
                     </div>
-                    <div className="col-sm-1">
-                    </div>
-                    <div className="col-sm">
+
+                    <div className="col-sm-4">
                     <div className="profile-bookmark-info row-1 mt-5">
                         <h3>Following</h3>
                     </div>
@@ -172,7 +171,20 @@ function Profile() {
                     ))}
                     </div>
                 </div>
-                {/* </div> */}
+                <div className="col-sm">
+                    <div className="profile-bookmark-info row-1 mt-5">
+                        <h3>Followers</h3>
+                    </div>
+                    <div className="list-group">
+                    {followers.map((follows, index) => (
+                        <li key={index} className="list-group-item">
+                            <Link className="bookmark-items" to={`/FoodPilot/profile/${follows.follower._id}`}>
+                            {follows.follower.username}
+                            </Link>
+                        </li>
+                    ))}
+                    </div>
+                </div>            
             </div>
             <Link
               key={"list"}
