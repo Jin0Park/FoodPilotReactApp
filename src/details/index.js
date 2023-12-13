@@ -31,6 +31,7 @@ function Details() {
     useEffect(() => {
         fetchRestaurant();
         fetchBookmarks();
+        // accountBookmarksRestaurant();
     }, []);
 
     return (
@@ -48,7 +49,8 @@ function Details() {
                                 </button>
                             )}
                         </div>
-                        <div className="bookmark-container">
+                        {account.role !== Roles.ANONYMOUS && (
+                            <div className="bookmark-container">
                             <h2>Users who bookmarked this restaurant</h2>
                             <ul className="user-bookmarks">
                                 { bookmarks.length === 0 ? (
@@ -65,6 +67,7 @@ function Details() {
                                 )}
                             </ul>
                         </div>
+                        )}
                     </div>
                     
                     <div className="restaurant-information">
