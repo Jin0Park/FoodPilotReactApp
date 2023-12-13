@@ -18,6 +18,8 @@ import Shiros from '../images/Shiros.jpg';
 import SpicyPoPo from '../images/SpicyPoPo.jpg';
 import Mediterranean from '../images/Mediterranean.jpeg';
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { Roles } from '../login/roles';
 
 
 function Home() {
@@ -26,6 +28,7 @@ function Home() {
   let navigate = useNavigate();
 
   // <Link className="btn" to={`/FoodPilot/details/${restaurantYelpIds[0]}`}>Go to Restaurant</Link>
+  var account = useSelector((state) => state.accountReducer.account);
 
   const routeChange = () => {
     let path = `/FoodPilot/search`;
@@ -86,6 +89,8 @@ function Home() {
           </button> */}
         </div>
       </div>
+      {account.role !== Roles.ANONYMOUS && (
+        <>
       <h1 className="popular-header"> Most popular Restaurants in Holiday Seasons</h1>
       <div class="container" style={{ paddingBottom: "100px" }}>
         {/* <img src="#" class="card-img-top" alt="restaurant description"> */}
@@ -147,13 +152,17 @@ function Home() {
             </div>
           </div>
         </div>
+        </div>
+        </>
+      )}
+
         <footer>
           <p>© 2023 FoodPilot Inc. All Rights Reserved. Contact us at: foodpilot@gmail.com</p>
           <p>Presented by Helen, Jin, Matt, Rasy</p>
         </footer>
 
       </div>
-    </div >
+    // </div >
   );
 }
 

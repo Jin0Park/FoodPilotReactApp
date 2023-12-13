@@ -90,20 +90,26 @@ function Profile() {
                         </section>
                     </div>
                     <div className="profile-personal-info col-sm-5">
+                        { account.role === Roles.ANONYMOUS && (
+                            <span>
+                                <b>{<b>{userFirstName} {userLastName}</b>}</b><br/>{<b>{userZipCode}</b>}
+                            </span>   
+
+                        )}
                         { account.role === "ADMIN" && (
                             <span>
                                 <b>{<b>{userFirstName} {userLastName} {userRole}</b>}</b><br/>{<b>{userEmail}</b>}<br/>{<b>{userZipCode}</b>}
                             </span>                            
                         )}
-                        { account.role !== "ADMIN" && (
+                        { account.role !== "ADMIN" && account.role !== Roles.ANONYMOUS && (
                             <span>
                                 <b>{<b>{userFirstName} {userLastName}</b>}</b><br/>{<b>{userEmail}</b>}<br/>{<b>{userZipCode}</b>}
                             </span>                
                         )}
                     </div>
-                    {account.role != Roles.ANONYMOUS &&
+                    {account.role !== Roles.ANONYMOUS &&
                     <div className='col-sm follow-button'>
-                    {account._id != id && (
+                    {account._id !== id && (
                         <>
                             {alreadyFollowing() ? (
                                 <Link
@@ -128,7 +134,7 @@ function Profile() {
 
                 </div>
             </div>
-            {account.role != Roles.ANONYMOUS &&
+            {account.role !== Roles.ANONYMOUS &&
                 <div className="row">
                     <div className="col-sm-4">
                         <div className="profile-bookmark-info row-1 mt-5">
@@ -139,7 +145,7 @@ function Profile() {
                             <li key={index} className="list-group-item">
                                 <Link className="bookmark-items" to={`/FoodPilot/details/${bookmark.restaurantId}`}>
                                 {bookmark.restaurantName}
-                                {account._id == id &&
+                                {account._id === id &&
                                     <Link
                                     className="btn btn-danger button bookmark-delete-button"
                                     onClick={() => deleteBookmark(bookmark.restaurantId)}>
@@ -161,7 +167,7 @@ function Profile() {
                         <li key={index} className="list-group-item">
                             <Link className="bookmark-items" to={`/FoodPilot/profile/${follows.followed._id}`}>
                             {follows.followed.username}
-                            {account._id == id &&
+                            {account._id === id &&
                                 <Link
                                 className="btn btn-danger button bookmark-delete-button"
                                 onClick={() => unfollowUser(follows.followed)}>
@@ -189,7 +195,7 @@ function Profile() {
                 </div>            
             </div>
             }
-            {account.role != Roles.ANONYMOUS &&
+            {account.role !== Roles.ANONYMOUS &&
             <Link
               key={"list"}
               to={'/FoodPilot/home'}
@@ -198,7 +204,7 @@ function Profile() {
                 Log Out
             </Link>
             }
-            {account.role == Roles.ANONYMOUS &&
+            {account.role === Roles.ANONYMOUS &&
             <Link
               key={"list"}
               to={'/FoodPilot/login'}
@@ -207,7 +213,7 @@ function Profile() {
             </Link>
             }
             {/* `ONLY SHOW WHEN USER IS CURRENT USER` */}
-            {account._id == id &&
+            {account._id === id &&
                 <Link
                 key={"edit"}
                 to={`/FoodPilot/profile/edit/${account._id}`}
@@ -218,7 +224,7 @@ function Profile() {
 
             {/* ONLY SHOW WHEN USER IS CURRENT AND IS ADMIN */}
             <a>{account.role}</a>
-            {account.role == Roles.ADMIN && (
+            {account.role === Roles.ADMIN && (
                 <Link
                     key={"list"}
                     to={'/FoodPilot/admin/users'}
