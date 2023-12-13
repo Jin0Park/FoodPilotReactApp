@@ -48,21 +48,20 @@ function Profile() {
         console.log(restaurantId);
         const status = await bookmarkClient.deleteUserBookmarksRestaurant(id, restaurantId)
     }
-
     const followUser = async () => {
         const status = await followsClient.userFollowsUser(id);
     };
-    const unfollowUser = async () => {
-        const status = await followsClient.userUnfollowsUser(id);
+    const unfollowUser = async (unfollowId) => {
+        //console.log("unfollow", unfollowId._id);
+        const status = await followsClient.userUnfollowsUser(unfollowId._id);
     };
     const fetchFollowers = async () => {
         const followers = await followsClient.findFollowersOfUser(id);
-        console.log("followers are", followers);
+        //console.log("followers are", followers);
         setFollowers(followers);
     };
     const fetchFollowing = async () => {
         const following = await followsClient.findFollowedUsersByUser(id);
-        //console.log("following are", following);
         setFollowing(following);
     };
 
@@ -71,7 +70,7 @@ function Profile() {
             return follows.follower._id === account._id;
         });
     };
-    console.log(followers);
+    //console.log(followers);
 
     useEffect(() => {
         fetchBookmarks();

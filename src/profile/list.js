@@ -53,7 +53,6 @@ function UserList() {
     }
   };
 
-
   const fetchUsers = async () => {
     const users = await client.findAllUsers();
     setUsers(users);
@@ -76,17 +75,17 @@ function UserList() {
         </tr>
         <tr>
             <td>
-              <input value={user.password} onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}/>
-              <input value={user.username} onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}/>
+              <input placeholder={user.password} onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}/>
+              <input placeholder={user.username} onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}/>
             </td>
             <td>
-              <input value={user.firstName} onChange={(e) => setCredentials({ ...credentials, firstName: e.target.value })}/>
+              <input placeholder={user.firstName} onChange={(e) => setCredentials({ ...credentials, firstName: e.target.value })}/>
             </td>
             <td>
-              <input value={user.lastName} onChange={(e) => setCredentials({ ...credentials, lastName: e.target.value })}/>
+              <input placeholder={user.lastName} onChange={(e) => setCredentials({ ...credentials, lastName: e.target.value })}/>
             </td>
             <td>
-              <select value={user.role} onChange={(e) => setCredentials({ ...credentials, role: e.target.value })}>
+              <select placeholder={user.role} onChange={(e) => setCredentials({ ...credentials, role: e.target.value })}>
                 <option value="USER">User</option>
                 <option value="ADMIN">Admin</option>
                 <option value="BUSINESS_OWNER">Business Owner</option>
