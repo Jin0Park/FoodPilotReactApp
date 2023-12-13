@@ -206,7 +206,7 @@ function Profile() {
                 Log In
             </Link>
             }
-{/* `            ONLY SHOW WHEN USER IS CURRENT USER` */}
+            {/* `ONLY SHOW WHEN USER IS CURRENT USER` */}
             {account._id == id &&
                 <Link
                 key={"edit"}
