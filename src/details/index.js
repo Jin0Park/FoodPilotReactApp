@@ -31,7 +31,6 @@ function Details() {
     useEffect(() => {
         fetchRestaurant();
         fetchBookmarks();
-        // accountBookmarksRestaurant();
     }, []);
 
     return (
@@ -49,26 +48,27 @@ function Details() {
                                 </button>
                             )}
                         </div>
-                        {account.role !== Roles.ANONYMOUS && (
-                            <div className="bookmark-container">
+                        {/* {account.role !== Roles.ANONYMOUS && (
+                            
+                        )} */}
+                        <div className="bookmark-container">
                             <h2>Users who bookmarked this restaurant</h2>
-                            <ul className="user-bookmarks">
-                                { bookmarks.length === 0 ? (
-                                    <p>"Be the first one who bookmarked this restaurant in the FoodPilot!"</p>
-                                    ) : (
-                                        bookmarks.map((bookmark, index) => (
-                                            <Link to={`/FoodPilot/profile/${bookmark.user._id}`} key={index}>
-                                                <li className="user-bookmark" key={index}>
-                                                    {bookmark.user.username}
-                                                </li>
-                                            </Link>
+                                <ul className="user-bookmarks">
+                                    { bookmarks.length === 0 ? (
+                                        <p>"Be the first one who bookmarked this restaurant in the FoodPilot!"</p>
+                                        ) : (
+                                            bookmarks.map((bookmark, index) => (
+                                                <Link to={`/FoodPilot/profile/${bookmark.user._id}`} key={index}>
+                                                    <li className="user-bookmark" key={index}>
+                                                        {bookmark.user.username}
+                                                    </li>
+                                                </Link>
+                                            )
                                         )
-                                    )
-                                )}
-                            </ul>
+                                    )}
+                                </ul>
+                            </div>
                         </div>
-                        )}
-                    </div>
                     
                     <div className="restaurant-information">
                         <Link className="restaurant-yelp-link" to={restaurant.url}>
