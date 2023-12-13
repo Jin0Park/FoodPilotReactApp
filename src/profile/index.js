@@ -101,6 +101,7 @@ function Profile() {
                             </span>                
                         )}
                     </div>
+                    {account.role != Roles.ANONYMOUS &&
                     <div className='col-sm follow-button'>
                     {account._id != id && (
                         <>
@@ -123,9 +124,11 @@ function Profile() {
 
                     )}
                     </div>
+                    }
+
                 </div>
             </div>
-            {/* <div className="profile-bookmark-info mt-5 container"> */}
+            {account.role != Roles.ANONYMOUS &&
                 <div className="row">
                     <div className="col-sm-4">
                         <div className="profile-bookmark-info row-1 mt-5">
@@ -185,6 +188,8 @@ function Profile() {
                     </div>
                 </div>            
             </div>
+            }
+            {account.role != Roles.ANONYMOUS &&
             <Link
               key={"list"}
               to={'/FoodPilot/home'}
@@ -192,6 +197,15 @@ function Profile() {
               className="btn btn-danger button edit-button mt-5 me-2">
                 Log Out
             </Link>
+            }
+            {account.role == Roles.ANONYMOUS &&
+            <Link
+              key={"list"}
+              to={'/FoodPilot/login'}
+              className="btn btn-success button edit-button mt-5 me-2">
+                Log In
+            </Link>
+            }
 {/* `            ONLY SHOW WHEN USER IS CURRENT USER` */}
             {account._id == id &&
                 <Link
